@@ -9,6 +9,8 @@
  * Defines the tools related to Trello cards
  * Each tool has a name, description, and input schema following JSON Schema format
  */
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 export const cardTools = [
     {
         name: "get_card",
@@ -25,7 +27,8 @@ export const cardTools = [
                     items: { type: "string" },
                     description: "Specific fields to include in the response (default: all fields)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_card)},
             required: ["cardId"]
         }
     },
@@ -97,7 +100,8 @@ export const cardTools = [
                     type: "string",
                     description: "Coordinates for the card (latitude,longitude)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_card)},
             required: ["name", "idList"]
         }
     },
@@ -206,7 +210,8 @@ export const cardTools = [
                     },
                     description: "Cover settings for the card"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_card)},
             required: ["cardId"]
         }
     },
@@ -224,7 +229,8 @@ export const cardTools = [
                     type: "boolean",
                     description: "Confirmation flag to prevent accidental deletion"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_card)},
             required: ["cardId", "confirm"]
         }
     },
@@ -238,7 +244,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the card to archive"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.archive_card)},
             required: ["cardId"]
         }
     },
@@ -252,7 +259,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the card to unarchive"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.unarchive_card)},
             required: ["cardId"]
         }
     },
@@ -270,7 +278,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the destination list"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.move_card_to_list)},
             required: ["cardId", "listId"]
         }
     },
@@ -288,7 +297,8 @@ export const cardTools = [
                     type: "string",
                     description: "Text of the comment"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.add_comment)},
             required: ["cardId", "text"]
         }
     },
@@ -302,7 +312,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the card"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_comments)},
             required: ["cardId"]
         }
     },
@@ -324,7 +335,8 @@ export const cardTools = [
                     type: "string",
                     description: "Name for the attachment"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.add_attachment)},
             required: ["cardId", "url"]
         }
     },
@@ -338,7 +350,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the card"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_attachments)},
             required: ["cardId"]
         }
     },
@@ -356,7 +369,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the attachment to delete"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_attachment)},
             required: ["cardId", "attachmentId"]
         }
     },
@@ -374,7 +388,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the member to add"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.add_member)},
             required: ["cardId", "memberId"]
         }
     },
@@ -392,7 +407,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the member to remove"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.remove_member)},
             required: ["cardId", "memberId"]
         }
     },
@@ -410,7 +426,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the label to add"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.add_label)},
             required: ["cardId", "labelId"]
         }
     },
@@ -428,7 +445,8 @@ export const cardTools = [
                     type: "string",
                     description: "ID of the label to remove"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.remove_label)},
             required: ["cardId", "labelId"]
         }
     },
@@ -446,7 +464,8 @@ export const cardTools = [
                     type: ["string", "null"],
                     description: "Due date (ISO-8601 format, e.g., 2023-12-31T12:00:00Z), or null to remove"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.set_due_date)},
             required: ["cardId", "due"]
         }
     },
@@ -464,7 +483,8 @@ export const cardTools = [
                     type: "boolean",
                     description: "Whether the due date is complete"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.set_due_complete)},
             required: ["cardId", "dueComplete"]
         }
     }

@@ -9,6 +9,8 @@
  * Defines the tools related to Trello members
  * Each tool has a name, description, and input schema following JSON Schema format
  */
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 export const memberTools = [
     {
         name: "get_me",
@@ -21,7 +23,8 @@ export const memberTools = [
                     items: { type: "string" },
                     description: "Specific fields to include in the response (default: all fields)"
                 }
-            }
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_me)}
         }
     },
     {
@@ -39,7 +42,8 @@ export const memberTools = [
                     items: { type: "string" },
                     description: "Specific fields to include in the response (default: all fields)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_member)},
             required: ["memberIdOrUsername"]
         }
     },
@@ -58,7 +62,8 @@ export const memberTools = [
                     enum: ["all", "closed", "members", "open", "organization", "public", "starred"],
                     description: "Filter boards by status or membership (default: all)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_member_boards)},
             required: ["memberIdOrUsername"]
         }
     },
@@ -72,7 +77,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID or username of the member"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_member_cards)},
             required: ["memberIdOrUsername"]
         }
     },
@@ -86,7 +92,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID or username of the member"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_boards_invited)},
             required: ["memberIdOrUsername"]
         }
     },
@@ -100,7 +107,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID or username of the member"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_member_organizations)},
             required: ["memberIdOrUsername"]
         }
     },
@@ -125,7 +133,8 @@ export const memberTools = [
                     maximum: 1000,
                     description: "Maximum number of notifications to return (max 1000, default: 50)"
                 }
-            }
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_notifications)}
         }
     },
     {
@@ -173,7 +182,8 @@ export const memberTools = [
                     },
                     description: "Member preferences"
                 }
-            }
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_me)}
         }
     },
     {
@@ -187,7 +197,8 @@ export const memberTools = [
                     enum: [30, 50, 170, "original"],
                     description: "Size of the avatar (30, 50, 170, or original) (default: original)"
                 }
-            }
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_avatar)}
         }
     },
     {
@@ -206,7 +217,8 @@ export const memberTools = [
                     maximum: 20,
                     description: "Maximum number of results to return (max 20, default: 8)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.search_members)},
             required: ["query"]
         }
     },
@@ -220,7 +232,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID of the board"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board_members)},
             required: ["boardId"]
         }
     },
@@ -234,7 +247,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID of the organization"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_organization_members)},
             required: ["organizationId"]
         }
     },
@@ -248,7 +262,8 @@ export const memberTools = [
                     type: "string",
                     description: "ID of the card"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_card_members)},
             required: ["cardId"]
         }
     }

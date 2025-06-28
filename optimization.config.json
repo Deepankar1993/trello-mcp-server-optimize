@@ -1,0 +1,53 @@
+{
+  "global": {
+    "defaultLevel": "standard",
+    "enabled": true,
+    "enableCaching": false,
+    "cacheTTL": 300,
+    "enableMetrics": true,
+    "presetsPath": "./optimization-presets"
+  },
+  "operations": {
+    "get_board": {
+      "defaultLevel": "standard",
+      "description": "Returns board information with 86% token reduction at standard level"
+    },
+    "get_cards_in_list": {
+      "defaultLevel": "standard",
+      "description": "Returns cards with 74% token reduction at standard level",
+      "arrayHandling": {
+        "maxItems": 100,
+        "summarize": false
+      }
+    },
+    "get_card": {
+      "defaultLevel": "standard",
+      "description": "Returns single card with optimized fields"
+    },
+    "get_me": {
+      "defaultLevel": "standard",
+      "description": "Returns authenticated user info"
+    },
+    "get_member": {
+      "defaultLevel": "standard",
+      "description": "Returns member info"
+    },
+    "get_list": {
+      "defaultLevel": "standard",
+      "description": "Returns list info"
+    },
+    "get_member_boards": {
+      "defaultLevel": "standard",
+      "description": "Returns member's boards"
+    },
+    "get_comments": {
+      "defaultLevel": "standard",
+      "description": "Returns card comments"
+    },
+    "get_board_lists": {
+      "defaultLevel": "standard",
+      "description": "Returns board's lists"
+    }
+  },
+  "description": "Trello MCP Server optimization configuration. Controls response filtering to reduce token usage while maintaining essential functionality."
+}

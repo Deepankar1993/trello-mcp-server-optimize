@@ -1,0 +1,44 @@
+{
+  "entity": "comment",
+  "description": "Optimization presets for Trello comment/action operations",
+  "presets": {
+    "minimal": {
+      "description": "Essential comment information only",
+      "include": ["id", "data", "date", "idMemberCreator"]
+    },
+    "standard": {
+      "description": "Common fields for typical comment operations",
+      "include": ["id", "data", "date", "idMemberCreator", "type", "memberCreator"]
+    },
+    "detailed": {
+      "description": "Most fields except heavy nested objects",
+      "exclude": ["limits", "display", "entities", "appCreator"]
+    }
+  },
+  "fieldMappings": {
+    "limits": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 50,
+      "description": "API rate limit information"
+    },
+    "display": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 80,
+      "description": "Display formatting information"
+    },
+    "entities": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 100,
+      "description": "Linked entities metadata"
+    },
+    "memberCreator": {
+      "tokenImpact": "medium",
+      "importance": "high",
+      "estimatedTokens": 100,
+      "description": "Full member object of comment creator"
+    }
+  }
+}

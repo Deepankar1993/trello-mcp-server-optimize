@@ -18,7 +18,9 @@
         "start": "node build/index.js",
         "dev": "tsc -w",
         "prepare": "npm run build",
-        "test": "echo \"No tests specified\" && exit 0"
+        "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+        "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
+        "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage"
     },
     "keywords": [
         "mcp",
@@ -33,10 +35,15 @@
     "dependencies": {
         "@modelcontextprotocol/sdk": "0.6.0",
         "axios": "^1.6.7",
-        "dotenv": "^16.4.1"
+        "dotenv": "^16.4.1",
+        "tiktoken": "^1.0.21"
     },
     "devDependencies": {
+        "@jest/globals": "^30.0.3",
+        "@types/jest": "^30.0.0",
         "@types/node": "^20.11.16",
+        "jest": "^30.0.3",
+        "ts-jest": "^29.4.0",
         "typescript": "^5.3.3"
     },
     "engines": {

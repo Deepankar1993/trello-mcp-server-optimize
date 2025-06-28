@@ -5,6 +5,8 @@
  * Each tool includes a name, description, and input schema.
  */
 
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 /**
  * Defines the tools related to Trello boards
  * Each tool has a name, description, and input schema following JSON Schema format
@@ -21,11 +23,7 @@ export const boardTools = [
                     enum: ["all", "closed", "members", "open", "organization", "public", "starred", "unpinned"],
                     description: "Filter boards by status or membership"
                 },
-                fields: {
-                    type: "array",
-                    items: { type: "string" },
-                    description: "Specific fields to include in the response (default: all fields)"
-                }
+                ...getOptimizationParamsForOperation(operationTypeMap.get_boards)
             }
         }
     },
@@ -39,11 +37,7 @@ export const boardTools = [
                     type: "string",
                     description: "ID of the board to retrieve"
                 },
-                fields: {
-                    type: "array",
-                    items: { type: "string" },
-                    description: "Specific fields to include in the response (default: all fields)"
-                }
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board)
             },
             required: ["boardId"]
         }
@@ -124,7 +118,8 @@ export const boardTools = [
                     type: "string",
                     enum: ["regular", "pirate"],
                     description: "Card aging style (default: regular)"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.create_board)
             },
             required: ["name"]
         }
@@ -223,7 +218,8 @@ export const boardTools = [
                 labelNames_blue: {
                     type: "string",
                     description: "Name for the blue label"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.update_board)
             },
             required: ["boardId"]
         }
@@ -241,7 +237,8 @@ export const boardTools = [
                 confirm: {
                     type: "boolean",
                     description: "Confirmation flag to prevent accidental deletion"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_board)
             },
             required: ["boardId", "confirm"]
         }
@@ -260,7 +257,8 @@ export const boardTools = [
                     type: "string",
                     enum: ["all", "closed", "none", "open"],
                     description: "Filter lists by status (default: open)"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board_lists)
             },
             required: ["boardId"]
         }
@@ -274,7 +272,8 @@ export const boardTools = [
                 boardId: {
                     type: "string",
                     description: "ID of the board"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board_members)
             },
             required: ["boardId"]
         }
@@ -288,7 +287,8 @@ export const boardTools = [
                 boardId: {
                     type: "string",
                     description: "ID of the board"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board_labels)
             },
             required: ["boardId"]
         }
@@ -302,7 +302,8 @@ export const boardTools = [
                 boardId: {
                     type: "string",
                     description: "ID of the board to close"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.close_board)
             },
             required: ["boardId"]
         }
@@ -316,7 +317,8 @@ export const boardTools = [
                 boardId: {
                     type: "string",
                     description: "ID of the board to reopen"
-                }
+                },
+                ...getOptimizationParamsForOperation(operationTypeMap.reopen_board)
             },
             required: ["boardId"]
         }

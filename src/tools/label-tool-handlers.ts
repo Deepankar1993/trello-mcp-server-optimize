@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for label-related tools
@@ -18,7 +19,15 @@ export const labelToolHandlers = {
      */
     get_label: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.getLabel(args.labelId);
+        const { labelId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_label'),
+            fields
+        };
+        
+        return labelService.getLabel(labelId, optimization);
     },
 
     /**
@@ -28,7 +37,15 @@ export const labelToolHandlers = {
      */
     create_label: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.createLabel(args.boardId, args.name, args.color);
+        const { boardId, name, color, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_label'),
+            fields
+        };
+        
+        return labelService.createLabel(boardId, name, color, optimization);
     },
 
     /**
@@ -38,8 +55,15 @@ export const labelToolHandlers = {
      */
     update_label: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        const { labelId, ...updateData } = args;
-        return labelService.updateLabel(labelId, updateData);
+        const { labelId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_label'),
+            fields
+        };
+        
+        return labelService.updateLabel(labelId, updateData, optimization);
     },
 
     /**
@@ -64,7 +88,17 @@ export const labelToolHandlers = {
      */
     get_board_labels: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.getBoardLabels(args.boardId);
+        const { boardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board_labels'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return labelService.getBoardLabels(boardId, optimization);
     },
 
     /**
@@ -74,7 +108,15 @@ export const labelToolHandlers = {
      */
     update_label_name: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.updateName(args.labelId, args.name);
+        const { labelId, name, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_label_name'),
+            fields
+        };
+        
+        return labelService.updateName(labelId, name, optimization);
     },
 
     /**
@@ -84,7 +126,15 @@ export const labelToolHandlers = {
      */
     update_label_color: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.updateColor(args.labelId, args.color);
+        const { labelId, color, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_label_color'),
+            fields
+        };
+        
+        return labelService.updateColor(labelId, color, optimization);
     },
 
     /**
@@ -94,7 +144,15 @@ export const labelToolHandlers = {
      */
     create_label_on_card: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.createLabelOnCard(args.cardId, args.name, args.color);
+        const { cardId, name, color, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_label_on_card'),
+            fields
+        };
+        
+        return labelService.createLabelOnCard(cardId, name, color, optimization);
     },
 
     /**
@@ -104,7 +162,17 @@ export const labelToolHandlers = {
      */
     get_card_labels: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.getCardLabels(args.cardId);
+        const { cardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_card_labels'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return labelService.getCardLabels(cardId, optimization);
     },
 
     /**

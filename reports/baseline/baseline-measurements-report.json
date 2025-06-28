@@ -1,0 +1,703 @@
+{
+  "metadata": {
+    "timestamp": "2025-06-28T15:08:44.692Z",
+    "mode": "MOCK_DATA",
+    "boardId": "685ff55ec786614448169720",
+    "boardName": "Trello MCP Optimizations",
+    "totalOperationsMeasured": 18,
+    "totalOperationsPlanned": 18
+  },
+  "summaryByCategory": {
+    "board": {
+      "operations": [
+        {
+          "tool": "get_board",
+          "args": {
+            "boardId": "685ff55ec786614448169720"
+          },
+          "category": "board",
+          "toolName": "get_board",
+          "requestTokens": 14,
+          "responseTokens": 1248,
+          "totalTokens": 1262,
+          "executionTime": 4,
+          "responseSize": 3773,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.672Z"
+        },
+        {
+          "tool": "get_board_lists",
+          "args": {
+            "boardId": "685ff55ec786614448169720"
+          },
+          "category": "board",
+          "toolName": "get_board_lists",
+          "requestTokens": 14,
+          "responseTokens": 537,
+          "totalTokens": 551,
+          "executionTime": 1,
+          "responseSize": 1593,
+          "operationType": "list",
+          "timestamp": "2025-06-28T15:08:44.674Z"
+        },
+        {
+          "tool": "get_board_members",
+          "args": {
+            "boardId": "685ff55ec786614448169720"
+          },
+          "category": "board",
+          "toolName": "get_board_members",
+          "requestTokens": 14,
+          "responseTokens": 35,
+          "totalTokens": 49,
+          "executionTime": 1,
+          "responseSize": 94,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.675Z"
+        },
+        {
+          "tool": "get_board_labels",
+          "args": {
+            "boardId": "685ff55ec786614448169720"
+          },
+          "category": "board",
+          "toolName": "get_board_labels",
+          "requestTokens": 14,
+          "responseTokens": 213,
+          "totalTokens": 227,
+          "executionTime": 1,
+          "responseSize": 637,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.676Z"
+        }
+      ],
+      "totalTokens": 2089,
+      "avgTokens": 522
+    },
+    "card": {
+      "operations": [
+        {
+          "tool": "get_card",
+          "args": {
+            "cardId": "685ff7151dd5a6e9f1825c46"
+          },
+          "category": "card",
+          "toolName": "get_card",
+          "requestTokens": 20,
+          "responseTokens": 629,
+          "totalTokens": 649,
+          "executionTime": 1,
+          "responseSize": 1970,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.678Z"
+        },
+        {
+          "tool": "get_cards_in_list",
+          "args": {
+            "listId": "685ff6d394ae809cdfad1622"
+          },
+          "category": "card",
+          "toolName": "get_cards_in_list",
+          "requestTokens": 16,
+          "responseTokens": 2087,
+          "totalTokens": 2103,
+          "executionTime": 5,
+          "responseSize": 6809,
+          "operationType": "list",
+          "timestamp": "2025-06-28T15:08:44.683Z"
+        },
+        {
+          "tool": "get_comments",
+          "args": {
+            "cardId": "685ff7151dd5a6e9f1825c46"
+          },
+          "category": "card",
+          "toolName": "get_comments",
+          "requestTokens": 20,
+          "responseTokens": 594,
+          "totalTokens": 614,
+          "executionTime": 1,
+          "responseSize": 2036,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.684Z"
+        },
+        {
+          "tool": "get_attachments",
+          "args": {
+            "cardId": "685ff7151dd5a6e9f1825c46"
+          },
+          "category": "card",
+          "toolName": "get_attachments",
+          "requestTokens": 20,
+          "responseTokens": 1,
+          "totalTokens": 21,
+          "executionTime": 1,
+          "responseSize": 2,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.685Z"
+        },
+        {
+          "tool": "get_card_members",
+          "args": {
+            "cardId": "685ff7151dd5a6e9f1825c46"
+          },
+          "category": "card",
+          "toolName": "get_card_members",
+          "requestTokens": 20,
+          "responseTokens": 1,
+          "totalTokens": 21,
+          "executionTime": 0,
+          "responseSize": 2,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.685Z"
+        }
+      ],
+      "totalTokens": 3408,
+      "avgTokens": 682
+    },
+    "list": {
+      "operations": [
+        {
+          "tool": "get_list",
+          "args": {
+            "listId": "685ff6d394ae809cdfad1622"
+          },
+          "category": "list",
+          "toolName": "get_list",
+          "requestTokens": 16,
+          "responseTokens": 75,
+          "totalTokens": 91,
+          "executionTime": 1,
+          "responseSize": 231,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.686Z"
+        }
+      ],
+      "totalTokens": 91,
+      "avgTokens": 91
+    },
+    "member": {
+      "operations": [
+        {
+          "tool": "get_me",
+          "args": {},
+          "category": "member",
+          "toolName": "get_me",
+          "requestTokens": 1,
+          "responseTokens": 128,
+          "totalTokens": 129,
+          "executionTime": 1,
+          "responseSize": 357,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.687Z"
+        },
+        {
+          "tool": "get_member",
+          "args": {
+            "memberIdOrUsername": "me"
+          },
+          "category": "member",
+          "toolName": "get_member",
+          "requestTokens": 8,
+          "responseTokens": 128,
+          "totalTokens": 136,
+          "executionTime": 0,
+          "responseSize": 357,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.687Z"
+        },
+        {
+          "tool": "get_member_boards",
+          "args": {
+            "memberIdOrUsername": "me"
+          },
+          "category": "member",
+          "toolName": "get_member_boards",
+          "requestTokens": 8,
+          "responseTokens": 42,
+          "totalTokens": 50,
+          "executionTime": 1,
+          "responseSize": 127,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.688Z"
+        }
+      ],
+      "totalTokens": 315,
+      "avgTokens": 105
+    },
+    "label": {
+      "operations": [
+        {
+          "tool": "get_label",
+          "args": {
+            "labelId": "685ff55ec78661444816975f"
+          },
+          "category": "label",
+          "toolName": "get_label",
+          "requestTokens": 15,
+          "responseTokens": 37,
+          "totalTokens": 52,
+          "executionTime": 0,
+          "responseSize": 105,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.688Z"
+        },
+        {
+          "tool": "get_card_labels",
+          "args": {
+            "cardId": "685ff7151dd5a6e9f1825c46"
+          },
+          "category": "label",
+          "toolName": "get_card_labels",
+          "requestTokens": 20,
+          "responseTokens": 38,
+          "totalTokens": 58,
+          "executionTime": 1,
+          "responseSize": 107,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.689Z"
+        }
+      ],
+      "totalTokens": 110,
+      "avgTokens": 55
+    },
+    "checklist": {
+      "operations": [
+        {
+          "tool": "get_checklist",
+          "args": {
+            "checklistId": "685ff873df2ffa50f4aeaa55"
+          },
+          "category": "checklist",
+          "toolName": "get_checklist",
+          "requestTokens": 18,
+          "responseTokens": 533,
+          "totalTokens": 551,
+          "executionTime": 1,
+          "responseSize": 1610,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.690Z"
+        },
+        {
+          "tool": "get_checkitems",
+          "args": {
+            "checklistId": "685ff873df2ffa50f4aeaa55"
+          },
+          "category": "checklist",
+          "toolName": "get_checkitems",
+          "requestTokens": 18,
+          "responseTokens": 470,
+          "totalTokens": 488,
+          "executionTime": 1,
+          "responseSize": 1435,
+          "operationType": "read",
+          "timestamp": "2025-06-28T15:08:44.691Z"
+        }
+      ],
+      "totalTokens": 1039,
+      "avgTokens": 520
+    },
+    "search": {
+      "operations": [
+        {
+          "tool": "search_members",
+          "args": {
+            "query": "test"
+          },
+          "category": "search",
+          "toolName": "search_members",
+          "requestTokens": 5,
+          "responseTokens": 66,
+          "totalTokens": 71,
+          "executionTime": 0,
+          "responseSize": 180,
+          "operationType": "search",
+          "timestamp": "2025-06-28T15:08:44.691Z"
+        }
+      ],
+      "totalTokens": 71,
+      "avgTokens": 71
+    }
+  },
+  "top10HighestTokenOperations": [
+    {
+      "tool": "get_cards_in_list",
+      "category": "card",
+      "totalTokens": 2103,
+      "requestTokens": 16,
+      "responseTokens": 2087,
+      "responseSize": 6809,
+      "executionTime": 5
+    },
+    {
+      "tool": "get_board",
+      "category": "board",
+      "totalTokens": 1262,
+      "requestTokens": 14,
+      "responseTokens": 1248,
+      "responseSize": 3773,
+      "executionTime": 4
+    },
+    {
+      "tool": "get_card",
+      "category": "card",
+      "totalTokens": 649,
+      "requestTokens": 20,
+      "responseTokens": 629,
+      "responseSize": 1970,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_comments",
+      "category": "card",
+      "totalTokens": 614,
+      "requestTokens": 20,
+      "responseTokens": 594,
+      "responseSize": 2036,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_board_lists",
+      "category": "board",
+      "totalTokens": 551,
+      "requestTokens": 14,
+      "responseTokens": 537,
+      "responseSize": 1593,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_checklist",
+      "category": "checklist",
+      "totalTokens": 551,
+      "requestTokens": 18,
+      "responseTokens": 533,
+      "responseSize": 1610,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_checkitems",
+      "category": "checklist",
+      "totalTokens": 488,
+      "requestTokens": 18,
+      "responseTokens": 470,
+      "responseSize": 1435,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_board_labels",
+      "category": "board",
+      "totalTokens": 227,
+      "requestTokens": 14,
+      "responseTokens": 213,
+      "responseSize": 637,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_member",
+      "category": "member",
+      "totalTokens": 136,
+      "requestTokens": 8,
+      "responseTokens": 128,
+      "responseSize": 357,
+      "executionTime": 0
+    },
+    {
+      "tool": "get_me",
+      "category": "member",
+      "totalTokens": 129,
+      "requestTokens": 1,
+      "responseTokens": 128,
+      "responseSize": 357,
+      "executionTime": 1
+    }
+  ],
+  "tokenHotspots": [
+    {
+      "tool": "get_board",
+      "category": "board",
+      "totalTokens": 1262,
+      "percentOfResponse": 99
+    },
+    {
+      "tool": "get_cards_in_list",
+      "category": "card",
+      "totalTokens": 2103,
+      "percentOfResponse": 99
+    }
+  ],
+  "statistics": {
+    "current": {
+      "avgTokensPerOperation": 396,
+      "medianTokens": 129,
+      "maxTokens": 2103,
+      "minTokens": 21,
+      "totalTokensAllOperations": 7123,
+      "avgResponseSize": 1190,
+      "avgExecutionTime": 1
+    },
+    "optimizationTargets": {
+      "60_percent_reduction": {
+        "avgTokensPerOperation": 158,
+        "maxTokens": 841,
+        "totalSavings": 4274
+      },
+      "70_percent_reduction": {
+        "avgTokensPerOperation": 119,
+        "maxTokens": 631,
+        "totalSavings": 4986
+      },
+      "85_percent_reduction": {
+        "avgTokensPerOperation": 59,
+        "maxTokens": 315,
+        "totalSavings": 6055
+      },
+      "90_percent_reduction": {
+        "avgTokensPerOperation": 40,
+        "maxTokens": 210,
+        "totalSavings": 6411
+      }
+    }
+  },
+  "detailedMeasurements": [
+    {
+      "tool": "get_board",
+      "category": "board",
+      "operationType": "read",
+      "totalTokens": 1262,
+      "requestTokens": 14,
+      "responseTokens": 1248,
+      "responseSize": 3773,
+      "executionTime": 4,
+      "tokensPerByte": "0.334",
+      "timestamp": "2025-06-28T15:08:44.672Z"
+    },
+    {
+      "tool": "get_board_lists",
+      "category": "board",
+      "operationType": "list",
+      "totalTokens": 551,
+      "requestTokens": 14,
+      "responseTokens": 537,
+      "responseSize": 1593,
+      "executionTime": 1,
+      "tokensPerByte": "0.346",
+      "timestamp": "2025-06-28T15:08:44.674Z"
+    },
+    {
+      "tool": "get_board_members",
+      "category": "board",
+      "operationType": "read",
+      "totalTokens": 49,
+      "requestTokens": 14,
+      "responseTokens": 35,
+      "responseSize": 94,
+      "executionTime": 1,
+      "tokensPerByte": "0.521",
+      "timestamp": "2025-06-28T15:08:44.675Z"
+    },
+    {
+      "tool": "get_board_labels",
+      "category": "board",
+      "operationType": "read",
+      "totalTokens": 227,
+      "requestTokens": 14,
+      "responseTokens": 213,
+      "responseSize": 637,
+      "executionTime": 1,
+      "tokensPerByte": "0.356",
+      "timestamp": "2025-06-28T15:08:44.676Z"
+    },
+    {
+      "tool": "get_card",
+      "category": "card",
+      "operationType": "read",
+      "totalTokens": 649,
+      "requestTokens": 20,
+      "responseTokens": 629,
+      "responseSize": 1970,
+      "executionTime": 1,
+      "tokensPerByte": "0.329",
+      "timestamp": "2025-06-28T15:08:44.678Z"
+    },
+    {
+      "tool": "get_cards_in_list",
+      "category": "card",
+      "operationType": "list",
+      "totalTokens": 2103,
+      "requestTokens": 16,
+      "responseTokens": 2087,
+      "responseSize": 6809,
+      "executionTime": 5,
+      "tokensPerByte": "0.309",
+      "timestamp": "2025-06-28T15:08:44.683Z"
+    },
+    {
+      "tool": "get_comments",
+      "category": "card",
+      "operationType": "read",
+      "totalTokens": 614,
+      "requestTokens": 20,
+      "responseTokens": 594,
+      "responseSize": 2036,
+      "executionTime": 1,
+      "tokensPerByte": "0.302",
+      "timestamp": "2025-06-28T15:08:44.684Z"
+    },
+    {
+      "tool": "get_attachments",
+      "category": "card",
+      "operationType": "read",
+      "totalTokens": 21,
+      "requestTokens": 20,
+      "responseTokens": 1,
+      "responseSize": 2,
+      "executionTime": 1,
+      "tokensPerByte": "10.500",
+      "timestamp": "2025-06-28T15:08:44.685Z"
+    },
+    {
+      "tool": "get_card_members",
+      "category": "card",
+      "operationType": "read",
+      "totalTokens": 21,
+      "requestTokens": 20,
+      "responseTokens": 1,
+      "responseSize": 2,
+      "executionTime": 0,
+      "tokensPerByte": "10.500",
+      "timestamp": "2025-06-28T15:08:44.685Z"
+    },
+    {
+      "tool": "get_list",
+      "category": "list",
+      "operationType": "read",
+      "totalTokens": 91,
+      "requestTokens": 16,
+      "responseTokens": 75,
+      "responseSize": 231,
+      "executionTime": 1,
+      "tokensPerByte": "0.394",
+      "timestamp": "2025-06-28T15:08:44.686Z"
+    },
+    {
+      "tool": "get_me",
+      "category": "member",
+      "operationType": "read",
+      "totalTokens": 129,
+      "requestTokens": 1,
+      "responseTokens": 128,
+      "responseSize": 357,
+      "executionTime": 1,
+      "tokensPerByte": "0.361",
+      "timestamp": "2025-06-28T15:08:44.687Z"
+    },
+    {
+      "tool": "get_member",
+      "category": "member",
+      "operationType": "read",
+      "totalTokens": 136,
+      "requestTokens": 8,
+      "responseTokens": 128,
+      "responseSize": 357,
+      "executionTime": 0,
+      "tokensPerByte": "0.381",
+      "timestamp": "2025-06-28T15:08:44.687Z"
+    },
+    {
+      "tool": "get_member_boards",
+      "category": "member",
+      "operationType": "read",
+      "totalTokens": 50,
+      "requestTokens": 8,
+      "responseTokens": 42,
+      "responseSize": 127,
+      "executionTime": 1,
+      "tokensPerByte": "0.394",
+      "timestamp": "2025-06-28T15:08:44.688Z"
+    },
+    {
+      "tool": "get_label",
+      "category": "label",
+      "operationType": "read",
+      "totalTokens": 52,
+      "requestTokens": 15,
+      "responseTokens": 37,
+      "responseSize": 105,
+      "executionTime": 0,
+      "tokensPerByte": "0.495",
+      "timestamp": "2025-06-28T15:08:44.688Z"
+    },
+    {
+      "tool": "get_card_labels",
+      "category": "label",
+      "operationType": "read",
+      "totalTokens": 58,
+      "requestTokens": 20,
+      "responseTokens": 38,
+      "responseSize": 107,
+      "executionTime": 1,
+      "tokensPerByte": "0.542",
+      "timestamp": "2025-06-28T15:08:44.689Z"
+    },
+    {
+      "tool": "get_checklist",
+      "category": "checklist",
+      "operationType": "read",
+      "totalTokens": 551,
+      "requestTokens": 18,
+      "responseTokens": 533,
+      "responseSize": 1610,
+      "executionTime": 1,
+      "tokensPerByte": "0.342",
+      "timestamp": "2025-06-28T15:08:44.690Z"
+    },
+    {
+      "tool": "get_checkitems",
+      "category": "checklist",
+      "operationType": "read",
+      "totalTokens": 488,
+      "requestTokens": 18,
+      "responseTokens": 470,
+      "responseSize": 1435,
+      "executionTime": 1,
+      "tokensPerByte": "0.340",
+      "timestamp": "2025-06-28T15:08:44.691Z"
+    },
+    {
+      "tool": "search_members",
+      "category": "search",
+      "operationType": "search",
+      "totalTokens": 71,
+      "requestTokens": 5,
+      "responseTokens": 66,
+      "responseSize": 180,
+      "executionTime": 0,
+      "tokensPerByte": "0.394",
+      "timestamp": "2025-06-28T15:08:44.691Z"
+    }
+  ],
+  "recommendations": {
+    "highPriorityOptimizations": [
+      "get_board",
+      "get_cards_in_list"
+    ],
+    "potentialFieldsToFilter": [
+      "prefs (board preferences - often not needed)",
+      "badges (card badges - can be minimized)",
+      "descData (description metadata)",
+      "limits (API limits info)",
+      "nodeId (internal identifiers)",
+      "sharedSourceUrl (image URLs)",
+      "backgroundImageScaled (multiple image sizes)",
+      "labelNames (30 color variations)",
+      "switcherViews (UI preferences)",
+      "datasource (internal metadata)"
+    ],
+    "suggestedDetailLevels": {
+      "minimal": "Only essential fields (id, name, key properties)",
+      "standard": "Common fields for typical use cases",
+      "detailed": "All fields except metadata and preferences",
+      "full": "Complete response (current behavior)"
+    }
+  }
+}

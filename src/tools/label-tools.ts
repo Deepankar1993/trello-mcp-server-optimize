@@ -9,6 +9,8 @@
  * Defines the tools related to Trello labels
  * Each tool has a name, description, and input schema following JSON Schema format
  */
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 export const labelTools = [
     {
         name: "get_label",
@@ -20,7 +22,8 @@ export const labelTools = [
                     type: "string",
                     description: "ID of the label to retrieve"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_label)},
             required: ["labelId"]
         }
     },
@@ -43,7 +46,8 @@ export const labelTools = [
                     enum: ["green", "yellow", "orange", "red", "purple", "blue", "sky", "lime", "pink", "black", null],
                     description: "Color of the label, or null for no color"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_label)},
             required: ["boardId", "name", "color"]
         }
     },
@@ -66,7 +70,8 @@ export const labelTools = [
                     enum: ["green", "yellow", "orange", "red", "purple", "blue", "sky", "lime", "pink", "black", null],
                     description: "New color for the label, or null for no color"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_label)},
             required: ["labelId"]
         }
     },
@@ -84,7 +89,8 @@ export const labelTools = [
                     type: "boolean",
                     description: "Confirmation flag to prevent accidental deletion"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_label)},
             required: ["labelId", "confirm"]
         }
     },
@@ -98,7 +104,8 @@ export const labelTools = [
                     type: "string",
                     description: "ID of the board"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_board_labels)},
             required: ["boardId"]
         }
     },
@@ -116,7 +123,8 @@ export const labelTools = [
                     type: "string",
                     description: "New name for the label"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_label_name)},
             required: ["labelId", "name"]
         }
     },
@@ -135,7 +143,8 @@ export const labelTools = [
                     enum: ["green", "yellow", "orange", "red", "purple", "blue", "sky", "lime", "pink", "black", null],
                     description: "New color for the label, or null for no color"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_label_color)},
             required: ["labelId", "color"]
         }
     },
@@ -158,7 +167,8 @@ export const labelTools = [
                     enum: ["green", "yellow", "orange", "red", "purple", "blue", "sky", "lime", "pink", "black", null],
                     description: "Color of the label, or null for no color"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_label_on_card)},
             required: ["cardId", "name", "color"]
         }
     },
@@ -172,7 +182,8 @@ export const labelTools = [
                     type: "string",
                     description: "ID of the card"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_card_labels)},
             required: ["cardId"]
         }
     },
@@ -190,7 +201,8 @@ export const labelTools = [
                     type: "string",
                     description: "ID of the label to add"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.add_label_to_card)},
             required: ["cardId", "labelId"]
         }
     },
@@ -208,7 +220,8 @@ export const labelTools = [
                     type: "string",
                     description: "ID of the label to remove"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.remove_label_from_card)},
             required: ["cardId", "labelId"]
         }
     }

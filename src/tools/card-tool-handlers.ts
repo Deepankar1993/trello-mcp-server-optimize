@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for card-related tools
@@ -18,7 +19,15 @@ export const cardToolHandlers = {
      */
     get_card: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.getCard(args.cardId);
+        const { cardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_card'),
+            fields
+        };
+        
+        return cardService.getCard(cardId, optimization);
     },
 
     /**
@@ -28,7 +37,15 @@ export const cardToolHandlers = {
      */
     create_card: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.createCard(args);
+        const { detailLevel, fields, ...createData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_card'),
+            fields
+        };
+        
+        return cardService.createCard(createData, optimization);
     },
 
     /**
@@ -38,8 +55,15 @@ export const cardToolHandlers = {
      */
     update_card: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        const { cardId, ...updateData } = args;
-        return cardService.updateCard(cardId, updateData);
+        const { cardId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_card'),
+            fields
+        };
+        
+        return cardService.updateCard(cardId, updateData, optimization);
     },
 
     /**
@@ -64,7 +88,15 @@ export const cardToolHandlers = {
      */
     archive_card: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.archiveCard(args.cardId);
+        const { cardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('archive_card'),
+            fields
+        };
+        
+        return cardService.archiveCard(cardId, optimization);
     },
 
     /**
@@ -74,7 +106,15 @@ export const cardToolHandlers = {
      */
     unarchive_card: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.unarchiveCard(args.cardId);
+        const { cardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('unarchive_card'),
+            fields
+        };
+        
+        return cardService.unarchiveCard(cardId, optimization);
     },
 
     /**
@@ -84,7 +124,15 @@ export const cardToolHandlers = {
      */
     move_card_to_list: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.moveCardToList(args.cardId, args.listId);
+        const { cardId, listId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('move_card_to_list'),
+            fields
+        };
+        
+        return cardService.moveCardToList(cardId, listId, optimization);
     },
 
     /**
@@ -94,7 +142,15 @@ export const cardToolHandlers = {
      */
     add_comment: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.addComment(args.cardId, args.text);
+        const { cardId, text, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('add_comment'),
+            fields
+        };
+        
+        return cardService.addComment(cardId, text, optimization);
     },
 
     /**
@@ -104,7 +160,17 @@ export const cardToolHandlers = {
      */
     get_comments: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.getComments(args.cardId);
+        const { cardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_comments'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return cardService.getComments(cardId, optimization);
     },
 
     /**
@@ -114,7 +180,15 @@ export const cardToolHandlers = {
      */
     add_attachment: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.addAttachment(args.cardId, args.url, args.name);
+        const { cardId, url, name, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('add_attachment'),
+            fields
+        };
+        
+        return cardService.addAttachment(cardId, url, name, optimization);
     },
 
     /**
@@ -124,7 +198,17 @@ export const cardToolHandlers = {
      */
     get_attachments: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.getAttachments(args.cardId);
+        const { cardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_attachments'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return cardService.getAttachments(cardId, optimization);
     },
 
     /**
@@ -189,7 +273,15 @@ export const cardToolHandlers = {
      */
     set_due_date: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.updateCard(args.cardId, { due: args.due });
+        const { cardId, due, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('set_due_date'),
+            fields
+        };
+        
+        return cardService.updateCard(cardId, { due }, optimization);
     },
 
     /**
@@ -199,6 +291,14 @@ export const cardToolHandlers = {
      */
     set_due_complete: async (args: any) => {
         const cardService = ServiceFactory.getInstance().getCardService();
-        return cardService.updateCard(args.cardId, { dueComplete: args.dueComplete });
+        const { cardId, dueComplete, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('set_due_complete'),
+            fields
+        };
+        
+        return cardService.updateCard(cardId, { dueComplete }, optimization);
     }
 };

@@ -16,6 +16,8 @@ import {
     TrelloAttachment,
     TrelloLabel
 } from '../types/trello-types.js';
+import { RuntimeOptimizationConfig } from '../types/optimization-types.js';
+import { responseOptimizer } from '../utils/response-optimizer.js';
 
 /**
  * Service for interacting with Trello cards
@@ -34,29 +36,35 @@ export class CardService {
     /**
      * Get a specific card by ID
      * @param cardId - ID of the card to retrieve
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the card
      */
-    async getCard(cardId: string): Promise<TrelloCard> {
-        return this.trelloService.get<TrelloCard>(`/cards/${cardId}`);
+    async getCard(cardId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        const response = await this.trelloService.get<TrelloCard>(`/cards/${cardId}`);
+        return responseOptimizer.optimize(response, 'get_card', optimization);
     }
 
     /**
      * Create a new card
      * @param data - Card creation data
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the created card
      */
-    async createCard(data: CreateCardData): Promise<TrelloCard> {
-        return this.trelloService.post<TrelloCard>('/cards', data);
+    async createCard(data: CreateCardData, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        const response = await this.trelloService.post<TrelloCard>('/cards', data);
+        return responseOptimizer.optimize(response, 'create_card', optimization);
     }
 
     /**
      * Update an existing card
      * @param cardId - ID of the card to update
      * @param data - Card update data
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated card
      */
-    async updateCard(cardId: string, data: UpdateCardData): Promise<TrelloCard> {
-        return this.trelloService.put<TrelloCard>(`/cards/${cardId}`, data);
+    async updateCard(cardId: string, data: UpdateCardData, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        const response = await this.trelloService.put<TrelloCard>(`/cards/${cardId}`, data);
+        return responseOptimizer.optimize(response, 'update_card', optimization);
     }
 
     /**
@@ -71,29 +79,32 @@ export class CardService {
     /**
      * Archive a card
      * @param cardId - ID of the card to archive
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated card
      */
-    async archiveCard(cardId: string): Promise<TrelloCard> {
-        return this.updateCard(cardId, { closed: true });
+    async archiveCard(cardId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        return this.updateCard(cardId, { closed: true }, optimization);
     }
 
     /**
      * Unarchive a card
      * @param cardId - ID of the card to unarchive
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated card
      */
-    async unarchiveCard(cardId: string): Promise<TrelloCard> {
-        return this.updateCard(cardId, { closed: false });
+    async unarchiveCard(cardId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        return this.updateCard(cardId, { closed: false }, optimization);
     }
 
     /**
      * Move a card to a different list
      * @param cardId - ID of the card to move
      * @param listId - ID of the destination list
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated card
      */
-    async moveCardToList(cardId: string, listId: string): Promise<TrelloCard> {
-        return this.updateCard(cardId, { idList: listId });
+    async moveCardToList(cardId: string, listId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCard> {
+        return this.updateCard(cardId, { idList: listId }, optimization);
     }
 
     /**
@@ -140,28 +151,34 @@ export class CardService {
      * Add a comment to a card
      * @param cardId - ID of the card
      * @param text - Comment text
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the created comment
      */
-    async addComment(cardId: string, text: string): Promise<any> {
-        return this.trelloService.post<any>(`/cards/${cardId}/actions/comments`, { text });
+    async addComment(cardId: string, text: string, optimization?: RuntimeOptimizationConfig): Promise<any> {
+        const response = await this.trelloService.post<any>(`/cards/${cardId}/actions/comments`, { text });
+        return responseOptimizer.optimize(response, 'add_comment', optimization);
     }
 
     /**
      * Get all comments on a card
      * @param cardId - ID of the card
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to an array of comments
      */
-    async getComments(cardId: string): Promise<any[]> {
-        return this.trelloService.get<any[]>(`/cards/${cardId}/actions`, { filter: 'commentCard' });
+    async getComments(cardId: string, optimization?: RuntimeOptimizationConfig): Promise<any[]> {
+        const response = await this.trelloService.get<any[]>(`/cards/${cardId}/actions`, { filter: 'commentCard' });
+        return responseOptimizer.optimize(response, 'get_comments', optimization);
     }
 
     /**
      * Get all attachments on a card
      * @param cardId - ID of the card
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to an array of attachments
      */
-    async getAttachments(cardId: string): Promise<TrelloAttachment[]> {
-        return this.trelloService.get<TrelloAttachment[]>(`/cards/${cardId}/attachments`);
+    async getAttachments(cardId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloAttachment[]> {
+        const response = await this.trelloService.get<TrelloAttachment[]>(`/cards/${cardId}/attachments`);
+        return responseOptimizer.optimize(response, 'get_attachments', optimization);
     }
 
     /**
@@ -169,10 +186,12 @@ export class CardService {
      * @param cardId - ID of the card
      * @param url - URL of the attachment
      * @param name - Optional name for the attachment
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the created attachment
      */
-    async addAttachment(cardId: string, url: string, name?: string): Promise<TrelloAttachment> {
-        return this.trelloService.post<TrelloAttachment>(`/cards/${cardId}/attachments`, { url, name });
+    async addAttachment(cardId: string, url: string, name?: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloAttachment> {
+        const response = await this.trelloService.post<TrelloAttachment>(`/cards/${cardId}/attachments`, { url, name });
+        return responseOptimizer.optimize(response, 'add_attachment', optimization);
     }
 
     /**

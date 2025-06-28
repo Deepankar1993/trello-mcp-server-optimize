@@ -42,3 +42,12 @@ coverage/
 # Temporary files
 tmp/
 temp/
+/.claude/
+/.claude/*
+/optimization-config-design.md
+/phase-1-completion-summary.md
+/PROJECT_PLAN_TOKEN_OPTIMIZATION.md
+/mcp-filtering-patterns-research.md
+/CLAUDE.md
+/Instructions for LLM.md
+/baseline-metrics-detailed.md

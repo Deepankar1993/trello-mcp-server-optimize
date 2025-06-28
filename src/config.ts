@@ -47,6 +47,19 @@ export interface Config {
     // Optional Settings
     debug: boolean;
     logLevel: 'debug' | 'info' | 'warn' | 'error';
+    
+    // Optimization Configuration
+    optimization: {
+        enabled: boolean;
+        defaultLevel: 'minimal' | 'standard' | 'detailed' | 'full';
+        maxResponseSize: number;
+        enableSummarization: boolean;
+        enableCaching: boolean;
+        cacheMaxSize: number;
+        cacheCleanupInterval: number;
+        truncateDescriptions: number;
+        enableMetrics: boolean;
+    };
 }
 
 /**
@@ -70,6 +83,19 @@ const configuration: Config = {
     // Optional Settings
     debug: (envArgs.DEBUG || process.env.DEBUG || 'false').toLowerCase() === 'true',
     logLevel: (envArgs.LOG_LEVEL || process.env.LOG_LEVEL || 'info') as Config['logLevel'],
+    
+    // Optimization Configuration
+    optimization: {
+        enabled: (envArgs.ENABLE_RESPONSE_OPTIMIZATION || process.env.ENABLE_RESPONSE_OPTIMIZATION || 'true').toLowerCase() === 'true',
+        defaultLevel: (envArgs.DEFAULT_OPTIMIZATION_LEVEL || process.env.DEFAULT_OPTIMIZATION_LEVEL || 'smart') as any,
+        maxResponseSize: parseInt(envArgs.MAX_RESPONSE_SIZE || process.env.MAX_RESPONSE_SIZE || '10000', 10),
+        enableSummarization: (envArgs.ENABLE_SUMMARIZATION || process.env.ENABLE_SUMMARIZATION || 'true').toLowerCase() === 'true',
+        enableCaching: (envArgs.ENABLE_CACHING || process.env.ENABLE_CACHING || 'true').toLowerCase() === 'true',
+        cacheMaxSize: parseInt(envArgs.CACHE_MAX_SIZE || process.env.CACHE_MAX_SIZE || '1000', 10),
+        cacheCleanupInterval: parseInt(envArgs.CACHE_CLEANUP_INTERVAL || process.env.CACHE_CLEANUP_INTERVAL || '300000', 10),
+        truncateDescriptions: parseInt(envArgs.TRUNCATE_DESCRIPTIONS || process.env.TRUNCATE_DESCRIPTIONS || '200', 10),
+        enableMetrics: (envArgs.ENABLE_METRICS || process.env.ENABLE_METRICS || 'false').toLowerCase() === 'true',
+    }
 };
 
 /**

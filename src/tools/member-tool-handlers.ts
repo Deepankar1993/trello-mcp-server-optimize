@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for member-related tools
@@ -18,7 +19,15 @@ export const memberToolHandlers = {
      */
     get_me: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getMe();
+        const { detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_me'),
+            fields
+        };
+        
+        return memberService.getMe(optimization);
     },
 
     /**
@@ -28,7 +37,15 @@ export const memberToolHandlers = {
      */
     get_member: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getMember(args.memberIdOrUsername);
+        const { memberIdOrUsername, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_member'),
+            fields
+        };
+        
+        return memberService.getMember(memberIdOrUsername, optimization);
     },
 
     /**
@@ -38,7 +55,17 @@ export const memberToolHandlers = {
      */
     get_member_boards: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getMemberBoards(args.memberIdOrUsername, args.filter);
+        const { memberIdOrUsername, filter, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_member_boards'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getMemberBoards(memberIdOrUsername, filter, optimization);
     },
 
     /**
@@ -48,7 +75,17 @@ export const memberToolHandlers = {
      */
     get_member_cards: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getMemberCards(args.memberIdOrUsername);
+        const { memberIdOrUsername, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_member_cards'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getMemberCards(memberIdOrUsername, optimization);
     },
 
     /**
@@ -58,7 +95,17 @@ export const memberToolHandlers = {
      */
     get_boards_invited: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getBoardsInvited(args.memberIdOrUsername);
+        const { memberIdOrUsername, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_boards_invited'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getBoardsInvited(memberIdOrUsername, optimization);
     },
 
     /**
@@ -68,7 +115,17 @@ export const memberToolHandlers = {
      */
     get_member_organizations: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getMemberOrganizations(args.memberIdOrUsername);
+        const { memberIdOrUsername, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_member_organizations'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getMemberOrganizations(memberIdOrUsername, optimization);
     },
 
     /**
@@ -78,7 +135,17 @@ export const memberToolHandlers = {
      */
     get_notifications: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getNotifications(args.filter, args.readFilter, args.limit);
+        const { filter, readFilter, limit, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_notifications'),
+            fields,
+            maxItems: maxItems || limit,
+            summarize
+        };
+        
+        return memberService.getNotifications(filter, readFilter, limit, optimization);
     },
 
     /**
@@ -88,7 +155,15 @@ export const memberToolHandlers = {
      */
     update_me: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.updateMe(args);
+        const { detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_me'),
+            fields
+        };
+        
+        return memberService.updateMe(updateData, optimization);
     },
 
     /**
@@ -98,7 +173,15 @@ export const memberToolHandlers = {
      */
     get_avatar: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getAvatar(args.size);
+        const { size, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_avatar'),
+            fields
+        };
+        
+        return memberService.getAvatar(size, optimization);
     },
 
     /**
@@ -108,7 +191,17 @@ export const memberToolHandlers = {
      */
     search_members: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.searchMembers(args.query, args.limit);
+        const { query, limit, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('search_members'),
+            fields,
+            maxItems: maxItems || limit,
+            summarize
+        };
+        
+        return memberService.searchMembers(query, limit, optimization);
     },
 
     /**
@@ -118,7 +211,17 @@ export const memberToolHandlers = {
      */
     get_board_members: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getBoardMembers(args.boardId);
+        const { boardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board_members'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getBoardMembers(boardId, optimization);
     },
 
     /**
@@ -128,7 +231,17 @@ export const memberToolHandlers = {
      */
     get_organization_members: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getOrganizationMembers(args.organizationId);
+        const { organizationId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_organization_members'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getOrganizationMembers(organizationId, optimization);
     },
 
     /**
@@ -138,6 +251,16 @@ export const memberToolHandlers = {
      */
     get_card_members: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getCardMembers(args.cardId);
+        const { cardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_card_members'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getCardMembers(cardId, optimization);
     }
 };

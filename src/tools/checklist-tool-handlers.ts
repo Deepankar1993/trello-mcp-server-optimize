@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for checklist-related tools
@@ -18,7 +19,15 @@ export const checklistToolHandlers = {
      */
     get_checklist: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.getChecklist(args.checklistId);
+        const { checklistId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_checklist'),
+            fields
+        };
+        
+        return checklistService.getChecklist(checklistId, optimization);
     },
 
     /**
@@ -28,7 +37,15 @@ export const checklistToolHandlers = {
      */
     create_checklist: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.createChecklist(args.cardId, args.name, args.pos, args.idChecklistSource);
+        const { cardId, name, pos, idChecklistSource, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_checklist'),
+            fields
+        };
+        
+        return checklistService.createChecklist(cardId, name, pos, idChecklistSource, optimization);
     },
 
     /**
@@ -38,8 +55,15 @@ export const checklistToolHandlers = {
      */
     update_checklist: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        const { checklistId, ...updateData } = args;
-        return checklistService.updateChecklist(checklistId, updateData);
+        const { checklistId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_checklist'),
+            fields
+        };
+        
+        return checklistService.updateChecklist(checklistId, updateData, optimization);
     },
 
     /**
@@ -60,7 +84,17 @@ export const checklistToolHandlers = {
      */
     get_checkitems: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.getCheckItems(args.checklistId);
+        const { checklistId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_checkitems'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return checklistService.getCheckItems(checklistId, optimization);
     },
 
     /**
@@ -70,13 +104,22 @@ export const checklistToolHandlers = {
      */
     create_checkitem: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
+        const { checklistId, name, pos, checked, due, memberId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_checkitem'),
+            fields
+        };
+        
         return checklistService.createCheckItem(
-            args.checklistId,
-            args.name,
-            args.pos,
-            args.checked,
-            args.due,
-            args.memberId
+            checklistId,
+            name,
+            pos,
+            checked,
+            due,
+            memberId,
+            optimization
         );
     },
 
@@ -87,7 +130,15 @@ export const checklistToolHandlers = {
      */
     get_checkitem: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.getCheckItem(args.checklistId, args.checkItemId);
+        const { checklistId, checkItemId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_checkitem'),
+            fields
+        };
+        
+        return checklistService.getCheckItem(checklistId, checkItemId, optimization);
     },
 
     /**
@@ -97,8 +148,15 @@ export const checklistToolHandlers = {
      */
     update_checkitem: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        const { checklistId, checkItemId, ...updateData } = args;
-        return checklistService.updateCheckItem(checklistId, checkItemId, updateData);
+        const { checklistId, checkItemId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_checkitem'),
+            fields
+        };
+        
+        return checklistService.updateCheckItem(checklistId, checkItemId, updateData, optimization);
     },
 
     /**
@@ -119,7 +177,15 @@ export const checklistToolHandlers = {
      */
     update_checklist_name: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.updateName(args.checklistId, args.name);
+        const { checklistId, name, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_checklist_name'),
+            fields
+        };
+        
+        return checklistService.updateName(checklistId, name, optimization);
     },
 
     /**
@@ -129,7 +195,15 @@ export const checklistToolHandlers = {
      */
     update_checklist_position: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.updatePosition(args.checklistId, args.position);
+        const { checklistId, position, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_checklist_position'),
+            fields
+        };
+        
+        return checklistService.updatePosition(checklistId, position, optimization);
     },
 
     /**
@@ -139,7 +213,15 @@ export const checklistToolHandlers = {
      */
     get_checklist_board: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.getBoard(args.checklistId);
+        const { checklistId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_checklist_board'),
+            fields
+        };
+        
+        return checklistService.getBoard(checklistId, optimization);
     },
 
     /**
@@ -149,7 +231,15 @@ export const checklistToolHandlers = {
      */
     get_checklist_card: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.getCard(args.checklistId);
+        const { checklistId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_checklist_card'),
+            fields
+        };
+        
+        return checklistService.getCard(checklistId, optimization);
     },
 
     /**
@@ -159,6 +249,14 @@ export const checklistToolHandlers = {
      */
     update_checkitem_state_on_card: async (args: any) => {
         const checklistService = ServiceFactory.getInstance().getChecklistService();
-        return checklistService.updateCheckItemStateOnCard(args.cardId, args.checkItemId, args.state);
+        const { cardId, checkItemId, state, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_checkitem_state_on_card'),
+            fields
+        };
+        
+        return checklistService.updateCheckItemStateOnCard(cardId, checkItemId, state, optimization);
     }
 };

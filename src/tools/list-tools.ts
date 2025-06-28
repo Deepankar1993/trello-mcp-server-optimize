@@ -9,6 +9,8 @@
  * Defines the tools related to Trello lists
  * Each tool has a name, description, and input schema following JSON Schema format
  */
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 export const listTools = [
     {
         name: "get_list",
@@ -25,7 +27,8 @@ export const listTools = [
                     items: { type: "string" },
                     description: "Specific fields to include in the response (default: all fields)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_list)},
             required: ["listId"]
         }
     },
@@ -47,7 +50,8 @@ export const listTools = [
                     type: ["string", "number"],
                     description: "Position of the list (top, bottom, or a positive number)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_list)},
             required: ["name", "idBoard"]
         }
     },
@@ -81,7 +85,8 @@ export const listTools = [
                     type: "boolean",
                     description: "Whether the authenticated user is subscribed to the list"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_list)},
             required: ["listId"]
         }
     },
@@ -95,7 +100,8 @@ export const listTools = [
                     type: "string",
                     description: "ID of the list to archive"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.archive_list)},
             required: ["listId"]
         }
     },
@@ -109,7 +115,8 @@ export const listTools = [
                     type: "string",
                     description: "ID of the list to unarchive"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.unarchive_list)},
             required: ["listId"]
         }
     },
@@ -127,7 +134,8 @@ export const listTools = [
                     type: "string",
                     description: "ID of the destination board"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.move_list_to_board)},
             required: ["listId", "boardId"]
         }
     },
@@ -145,8 +153,14 @@ export const listTools = [
                     type: "string",
                     enum: ["all", "closed", "none", "open"],
                     description: "Filter cards by status (default: open)"
+                },
+                detailLevel: {
+                    type: "string",
+                    enum: ["minimal", "standard", "detailed", "full"],
+                    description: "Level of detail in response. minimal: only essential fields (id, name, pos), standard: common fields, detailed: most fields, full: all fields (default: standard)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_cards_in_list)},
             required: ["listId"]
         }
     },
@@ -160,7 +174,8 @@ export const listTools = [
                     type: "string",
                     description: "ID of the list"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.archive_all_cards)},
             required: ["listId"]
         }
     },
@@ -182,7 +197,8 @@ export const listTools = [
                     type: "string",
                     description: "ID of the board (required by Trello API)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.move_all_cards)},
             required: ["sourceListId", "destinationListId", "boardId"]
         }
     },
@@ -200,7 +216,8 @@ export const listTools = [
                     type: ["string", "number"],
                     description: "New position for the list (top, bottom, or a positive number)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_list_position)},
             required: ["listId", "position"]
         }
     },
@@ -218,7 +235,8 @@ export const listTools = [
                     type: "string",
                     description: "New name for the list"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_list_name)},
             required: ["listId", "name"]
         }
     },
@@ -236,7 +254,8 @@ export const listTools = [
                     type: "boolean",
                     description: "Whether to subscribe (true) or unsubscribe (false)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.subscribe_to_list)},
             required: ["listId", "subscribed"]
         }
     }

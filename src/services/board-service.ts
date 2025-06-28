@@ -13,6 +13,8 @@ import {
     BoardFilters,
     TrelloList
 } from '../types/trello-types.js';
+import { RuntimeOptimizationConfig } from '../types/optimization-types.js';
+import { responseOptimizer } from '../utils/response-optimizer.js';
 
 /**
  * Service for interacting with Trello boards
@@ -30,39 +32,47 @@ export class BoardService {
 
     /**
      * Get all boards for the authenticated user
-     * @param filters - Optional filters to apply
+     * @param params - Object containing filters and optimization config
      * @returns Promise resolving to an array of boards
      */
-    async getBoards(filters?: BoardFilters): Promise<TrelloBoard[]> {
-        return this.trelloService.get<TrelloBoard[]>('/members/me/boards', filters);
+    async getBoards(params?: { filter?: string; fields?: string[]; optimization?: RuntimeOptimizationConfig }): Promise<TrelloBoard[]> {
+        const { optimization, ...filters } = params || {};
+        const response = await this.trelloService.get<TrelloBoard[]>('/members/me/boards', filters);
+        return responseOptimizer.optimize(response, 'get_boards', optimization);
     }
 
     /**
      * Get a specific board by ID
      * @param boardId - ID of the board to retrieve
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the board
      */
-    async getBoard(boardId: string): Promise<TrelloBoard> {
-        return this.trelloService.get<TrelloBoard>(`/boards/${boardId}`);
+    async getBoard(boardId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloBoard> {
+        const response = await this.trelloService.get<TrelloBoard>(`/boards/${boardId}`);
+        return responseOptimizer.optimize(response, 'get_board', optimization);
     }
 
     /**
      * Create a new board
-     * @param data - Board creation data
+     * @param params - Object containing board data and optimization config
      * @returns Promise resolving to the created board
      */
-    async createBoard(data: CreateBoardData): Promise<TrelloBoard> {
-        return this.trelloService.post<TrelloBoard>('/boards', data);
+    async createBoard(params: CreateBoardData & { optimization?: RuntimeOptimizationConfig }): Promise<TrelloBoard> {
+        const { optimization, ...data } = params;
+        const response = await this.trelloService.post<TrelloBoard>('/boards', data);
+        return responseOptimizer.optimize(response, 'create_board', optimization);
     }
 
     /**
      * Update an existing board
      * @param boardId - ID of the board to update
-     * @param data - Board update data
+     * @param params - Object containing update data and optimization config
      * @returns Promise resolving to the updated board
      */
-    async updateBoard(boardId: string, data: UpdateBoardData): Promise<TrelloBoard> {
-        return this.trelloService.put<TrelloBoard>(`/boards/${boardId}`, data);
+    async updateBoard(boardId: string, params: UpdateBoardData & { optimization?: RuntimeOptimizationConfig }): Promise<TrelloBoard> {
+        const { optimization, ...data } = params;
+        const response = await this.trelloService.put<TrelloBoard>(`/boards/${boardId}`, data);
+        return responseOptimizer.optimize(response, 'update_board', optimization);
     }
 
     /**
@@ -78,10 +88,12 @@ export class BoardService {
      * Get all lists on a board
      * @param boardId - ID of the board
      * @param filter - Optional filter (all, closed, none, open)
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to an array of lists
      */
-    async getLists(boardId: string, filter: 'all' | 'closed' | 'none' | 'open' = 'open'): Promise<TrelloList[]> {
-        return this.trelloService.get<TrelloList[]>(`/boards/${boardId}/lists`, { filter });
+    async getLists(boardId: string, filter: 'all' | 'closed' | 'none' | 'open' = 'open', optimization?: RuntimeOptimizationConfig): Promise<TrelloList[]> {
+        const response = await this.trelloService.get<TrelloList[]>(`/boards/${boardId}/lists`, { filter });
+        return responseOptimizer.optimize(response, 'get_board_lists', optimization);
     }
 
     /**

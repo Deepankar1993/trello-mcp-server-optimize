@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-06-28T15:08:44.692Z",
+  "mode": "MOCK_DATA",
+  "summary": "Measured 18 operations with average 396 tokens per operation",
+  "tokenHotspots": [
+    {
+      "tool": "get_board",
+      "category": "board",
+      "totalTokens": 1262,
+      "percentOfResponse": 99
+    },
+    {
+      "tool": "get_cards_in_list",
+      "category": "card",
+      "totalTokens": 2103,
+      "percentOfResponse": 99
+    }
+  ],
+  "top5Operations": [
+    {
+      "tool": "get_cards_in_list",
+      "category": "card",
+      "totalTokens": 2103,
+      "requestTokens": 16,
+      "responseTokens": 2087,
+      "responseSize": 6809,
+      "executionTime": 5
+    },
+    {
+      "tool": "get_board",
+      "category": "board",
+      "totalTokens": 1262,
+      "requestTokens": 14,
+      "responseTokens": 1248,
+      "responseSize": 3773,
+      "executionTime": 4
+    },
+    {
+      "tool": "get_card",
+      "category": "card",
+      "totalTokens": 649,
+      "requestTokens": 20,
+      "responseTokens": 629,
+      "responseSize": 1970,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_comments",
+      "category": "card",
+      "totalTokens": 614,
+      "requestTokens": 20,
+      "responseTokens": 594,
+      "responseSize": 2036,
+      "executionTime": 1
+    },
+    {
+      "tool": "get_board_lists",
+      "category": "board",
+      "totalTokens": 551,
+      "requestTokens": 14,
+      "responseTokens": 537,
+      "responseSize": 1593,
+      "executionTime": 1
+    }
+  ],
+  "categoryBreakdown": [
+    {
+      "category": "board",
+      "avgTokens": 522,
+      "operations": 4
+    },
+    {
+      "category": "card",
+      "avgTokens": 682,
+      "operations": 5
+    },
+    {
+      "category": "list",
+      "avgTokens": 91,
+      "operations": 1
+    },
+    {
+      "category": "member",
+      "avgTokens": 105,
+      "operations": 3
+    },
+    {
+      "category": "label",
+      "avgTokens": 55,
+      "operations": 2
+    },
+    {
+      "category": "checklist",
+      "avgTokens": 520,
+      "operations": 2
+    },
+    {
+      "category": "search",
+      "avgTokens": 71,
+      "operations": 1
+    }
+  ],
+  "targets": {
+    "current": 396,
+    "target60": 158,
+    "target85": 59
+  }
+}

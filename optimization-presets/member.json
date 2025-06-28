@@ -1,0 +1,48 @@
+{
+  "entity": "member",
+  "description": "Optimization presets for Trello member operations",
+  "presets": {
+    "minimal": {
+      "description": "Essential member information only",
+      "include": ["id", "username", "fullName"]
+    },
+    "standard": {
+      "description": "Common fields for typical member operations",
+      "include": ["id", "username", "fullName", "initials", "memberType"]
+    },
+    "detailed": {
+      "description": "Most fields except heavy nested objects",
+      "exclude": [
+        "avatarHash", "avatarUrl", "avatarSource", "gravatarHash", 
+        "uploadedAvatarHash", "uploadedAvatarUrl", "prefs", "limits",
+        "marketingOptIn", "messagesDismissed", "oneTimeMessagesDismissed"
+      ]
+    }
+  },
+  "fieldMappings": {
+    "avatarHash": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 20,
+      "description": "Avatar hash values"
+    },
+    "avatarUrl": {
+      "tokenImpact": "low",
+      "importance": "medium",
+      "estimatedTokens": 30,
+      "description": "Avatar URL"
+    },
+    "prefs": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 100,
+      "description": "Member preferences"
+    },
+    "limits": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 50,
+      "description": "API rate limit information"
+    }
+  }
+}

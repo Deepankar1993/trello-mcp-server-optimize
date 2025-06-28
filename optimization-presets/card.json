@@ -1,0 +1,68 @@
+{
+  "entity": "card",
+  "description": "Optimization presets for Trello card operations",
+  "presets": {
+    "minimal": {
+      "description": "Essential card information only",
+      "include": ["id", "name", "idList", "closed", "pos"]
+    },
+    "standard": {
+      "description": "Common fields for typical card operations",
+      "include": [
+        "id", "name", "desc", "idList", "closed", "pos", 
+        "due", "dueComplete", "labels", "idMembers", "shortUrl"
+      ]
+    },
+    "detailed": {
+      "description": "Most fields except heavy nested objects",
+      "exclude": [
+        "badges", "cover", "attachments", "descData", "limits", 
+        "checkItemStates", "pluginData", "customFieldItems"
+      ]
+    }
+  },
+  "fieldMappings": {
+    "badges": {
+      "tokenImpact": "high",
+      "importance": "low",
+      "estimatedTokens": 150,
+      "description": "Card metadata counts - 13+ sub-fields"
+    },
+    "cover": {
+      "tokenImpact": "medium",
+      "importance": "medium",
+      "estimatedTokens": 100,
+      "description": "Cover image URLs and metadata"
+    },
+    "attachments": {
+      "tokenImpact": "high",
+      "importance": "medium",
+      "estimatedTokens": 200,
+      "description": "Full attachment objects array"
+    },
+    "descData": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 30,
+      "description": "Rich text formatting metadata"
+    },
+    "limits": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 80,
+      "description": "API rate limit information"
+    },
+    "checkItemStates": {
+      "tokenImpact": "medium",
+      "importance": "medium",
+      "estimatedTokens": 100,
+      "description": "Checklist item completion states"
+    },
+    "customFieldItems": {
+      "tokenImpact": "medium",
+      "importance": "high",
+      "estimatedTokens": 100,
+      "description": "Custom field values"
+    }
+  }
+}

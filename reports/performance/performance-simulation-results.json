@@ -1,0 +1,272 @@
+{
+  "timestamp": "2025-06-28T22:17:54.890Z",
+  "summary": {
+    "totalCalls": 14,
+    "avgReductionPercentage": 70.9673333132016,
+    "avgExecutionTime": 0.14285714285714285,
+    "totalOriginalTokens": 142497,
+    "totalOptimizedTokens": 7983,
+    "cacheHitRate": 0,
+    "byOperation": {},
+    "byLevel": {}
+  },
+  "boardResults": [
+    {
+      "operation": "get_boards",
+      "level": "minimal",
+      "originalTokens": 4502,
+      "optimizedTokens": 104,
+      "tokenReduction": "97.69",
+      "originalSize": 16891,
+      "optimizedSize": 341,
+      "sizeReduction": "97.98"
+    },
+    {
+      "operation": "get_boards",
+      "level": "standard",
+      "originalTokens": 4502,
+      "optimizedTokens": 104,
+      "tokenReduction": "97.69",
+      "originalSize": 16891,
+      "optimizedSize": 341,
+      "sizeReduction": "97.98"
+    },
+    {
+      "operation": "get_boards",
+      "level": "detailed",
+      "originalTokens": 4502,
+      "optimizedTokens": 104,
+      "tokenReduction": "97.69",
+      "originalSize": 16891,
+      "optimizedSize": 341,
+      "sizeReduction": "97.98"
+    },
+    {
+      "operation": "get_boards",
+      "level": "full",
+      "originalTokens": 4502,
+      "optimizedTokens": 4502,
+      "tokenReduction": "0.00",
+      "originalSize": 16891,
+      "optimizedSize": 16891,
+      "sizeReduction": "0.00"
+    }
+  ],
+  "listResults": [
+    {
+      "operation": "get_board_lists",
+      "level": "minimal",
+      "originalTokens": 1207,
+      "optimizedTokens": 527,
+      "tokenReduction": "56.34",
+      "originalSize": 4041,
+      "optimizedSize": 1581,
+      "sizeReduction": "60.88"
+    },
+    {
+      "operation": "get_board_lists",
+      "level": "standard",
+      "originalTokens": 1207,
+      "optimizedTokens": 627,
+      "tokenReduction": "48.05",
+      "originalSize": 4041,
+      "optimizedSize": 1961,
+      "sizeReduction": "51.47"
+    },
+    {
+      "operation": "get_board_lists",
+      "level": "detailed",
+      "originalTokens": 1207,
+      "optimizedTokens": 728,
+      "tokenReduction": "39.69",
+      "originalSize": 4041,
+      "optimizedSize": 2481,
+      "sizeReduction": "38.60"
+    }
+  ],
+  "cardResults": [
+    {
+      "operation": "get_cards_in_list",
+      "level": "minimal",
+      "originalTokens": 22289,
+      "optimizedTokens": 153,
+      "tokenReduction": "99.31",
+      "originalSize": 84324,
+      "optimizedSize": 521,
+      "sizeReduction": "99.38"
+    },
+    {
+      "operation": "get_cards_in_list",
+      "level": "standard",
+      "originalTokens": 22289,
+      "optimizedTokens": 153,
+      "tokenReduction": "99.31",
+      "originalSize": 84324,
+      "optimizedSize": 521,
+      "sizeReduction": "99.38"
+    },
+    {
+      "operation": "get_cards_in_list",
+      "level": "detailed",
+      "originalTokens": 22289,
+      "optimizedTokens": 153,
+      "tokenReduction": "99.31",
+      "originalSize": 84324,
+      "optimizedSize": 521,
+      "sizeReduction": "99.38"
+    }
+  ],
+  "summarizeResult": {
+    "operation": "get_cards_in_list",
+    "level": "standard",
+    "originalTokens": 57602,
+    "optimizedTokens": 117,
+    "tokenReduction": "99.80",
+    "originalSize": 225181,
+    "optimizedSize": 372,
+    "sizeReduction": "99.83"
+  },
+  "detailedMetrics": [
+    {
+      "operation": "get_boards",
+      "timestamp": "2025-06-28T22:17:54.745Z",
+      "originalSize": 4223,
+      "optimizedSize": 86,
+      "reductionPercentage": 97.96353303338859,
+      "optimizationLevel": "minimal",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_boards",
+      "timestamp": "2025-06-28T22:17:54.754Z",
+      "originalSize": 4223,
+      "optimizedSize": 86,
+      "reductionPercentage": 97.96353303338859,
+      "optimizationLevel": "standard",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_boards",
+      "timestamp": "2025-06-28T22:17:54.759Z",
+      "originalSize": 4223,
+      "optimizedSize": 86,
+      "reductionPercentage": 97.96353303338859,
+      "optimizationLevel": "detailed",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_boards",
+      "timestamp": "2025-06-28T22:17:54.767Z",
+      "originalSize": 4223,
+      "optimizedSize": 4223,
+      "reductionPercentage": 0,
+      "optimizationLevel": "full",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.769Z",
+      "originalSize": 1011,
+      "optimizedSize": 396,
+      "reductionPercentage": 60.83086053412463,
+      "optimizationLevel": "minimal",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.770Z",
+      "originalSize": 1011,
+      "optimizedSize": 396,
+      "reductionPercentage": 60.83086053412463,
+      "optimizationLevel": "minimal",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.771Z",
+      "originalSize": 1011,
+      "optimizedSize": 491,
+      "reductionPercentage": 51.43422354104846,
+      "optimizationLevel": "standard",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.772Z",
+      "originalSize": 1011,
+      "optimizedSize": 491,
+      "reductionPercentage": 51.43422354104846,
+      "optimizationLevel": "standard",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.773Z",
+      "originalSize": 1011,
+      "optimizedSize": 621,
+      "reductionPercentage": 38.57566765578635,
+      "optimizationLevel": "detailed",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_board_lists",
+      "timestamp": "2025-06-28T22:17:54.774Z",
+      "originalSize": 1011,
+      "optimizedSize": 621,
+      "reductionPercentage": 38.57566765578635,
+      "optimizationLevel": "detailed",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_cards_in_list",
+      "timestamp": "2025-06-28T22:17:54.796Z",
+      "originalSize": 21081,
+      "optimizedSize": 131,
+      "reductionPercentage": 99.3785873535411,
+      "optimizationLevel": "minimal",
+      "executionTime": 1,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_cards_in_list",
+      "timestamp": "2025-06-28T22:17:54.816Z",
+      "originalSize": 21081,
+      "optimizedSize": 131,
+      "reductionPercentage": 99.3785873535411,
+      "optimizationLevel": "standard",
+      "executionTime": 1,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_cards_in_list",
+      "timestamp": "2025-06-28T22:17:54.836Z",
+      "originalSize": 21081,
+      "optimizedSize": 131,
+      "reductionPercentage": 99.3785873535411,
+      "optimizationLevel": "detailed",
+      "executionTime": 0,
+      "cacheHit": false
+    },
+    {
+      "operation": "get_cards_in_list",
+      "timestamp": "2025-06-28T22:17:54.888Z",
+      "originalSize": 56296,
+      "optimizedSize": 93,
+      "reductionPercentage": 99.83480176211454,
+      "optimizationLevel": "standard",
+      "executionTime": 0,
+      "cacheHit": false
+    }
+  ],
+  "targetMet": true
+}

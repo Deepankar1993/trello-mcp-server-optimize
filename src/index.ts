@@ -35,6 +35,7 @@ import { ServiceFactory } from "./services/service-factory.js";
 import { TrelloService } from "./services/trello-service.js";
 import { trelloTools } from "./tools/trello-tools.js";
 import { trelloToolHandlers } from "./tools/trello-tool-handlers.js";
+import { TokenMeasurement } from "./utils/token-measurement.js";
 
 // Redirect console.log and console.error to stderr to avoid interfering with MCP protocol
 const originalConsoleLog = console.log;
@@ -116,11 +117,13 @@ async function main() {
             };
         });
 
-        // Register tool call handler
+        // Initialize token measurement
+        const tokenMeasurer = TokenMeasurement.getInstance();
+
+        // Register tool call handler with token measurement
         server.setRequestHandler(CallToolRequestSchema, async (request) => {
             try {
                 const toolName = request.params.name;
-                // Use type assertion to tell TypeScript that toolName is a valid key
                 const handler = trelloToolHandlers[toolName as keyof typeof trelloToolHandlers];
 
                 if (!handler) {
@@ -130,8 +133,16 @@ async function main() {
                     );
                 }
 
-                // Execute the tool handler with the provided arguments
-                const result = await handler(request.params.arguments);
+                // Determine operation type based on tool name
+                const operationType = getOperationType(toolName);
+
+                // Measure the tool execution
+                const { result, measurement } = await tokenMeasurer.measureToolCall(
+                    toolName,
+                    request.params.arguments,
+                    operationType,
+                    () => handler(request.params.arguments)
+                );
 
                 // Return the result
                 return {
@@ -145,12 +156,10 @@ async function main() {
             } catch (error) {
                 console.error("Error handling tool call:", error);
 
-                // If it's already an MCP error, rethrow it
                 if (error instanceof McpError) {
                     throw error;
                 }
 
-                // Otherwise, wrap it in an MCP error
                 return {
                     content: [
                         {
@@ -172,6 +181,16 @@ async function main() {
         console.error("Failed to start server:", error);
         process.exit(1);
     }
+}
+
+/**
+ * Determines the operation type based on the tool name
+ */
+function getOperationType(toolName: string): 'read' | 'write' | 'list' | 'search' {
+    if (toolName.includes('search')) return 'search';
+    if (toolName.includes('get_boards') || toolName.includes('get_cards_in_list') || toolName.includes('get_board_lists')) return 'list';
+    if (toolName.includes('create') || toolName.includes('update') || toolName.includes('delete') || toolName.includes('add') || toolName.includes('remove') || toolName.includes('move') || toolName.includes('archive')) return 'write';
+    return 'read';
 }
 
 // Start the server

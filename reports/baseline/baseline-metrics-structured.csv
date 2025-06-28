@@ -1,0 +1,49 @@
+Operation,Category,Type,Total Tokens,Request Tokens,Response Tokens,Response Size (bytes),Execution Time (ms),Tokens per Byte,Token Reduction Target (85%),Priority
+get_cards_in_list,card,list,2103,16,2087,6809,5,0.309,315,CRITICAL
+get_board,board,read,1262,14,1248,3773,4,0.334,189,CRITICAL
+get_card,card,read,649,20,629,1970,1,0.329,97,HIGH
+get_comments,card,read,614,20,594,2036,1,0.302,92,HIGH
+get_board_lists,board,list,551,14,537,1593,1,0.346,83,HIGH
+get_checklist,checklist,read,551,18,533,1610,1,0.342,83,MEDIUM
+get_checkitems,checklist,read,488,18,470,1435,1,0.340,73,MEDIUM
+get_board_labels,board,read,227,14,213,637,1,0.356,34,MEDIUM
+get_member,member,read,136,8,128,357,0,0.381,20,LOW
+get_me,member,read,129,1,128,357,1,0.361,19,LOW
+get_list,list,read,91,16,75,231,1,0.394,14,LOW
+search_members,search,search,71,5,66,180,0,0.394,11,LOW
+get_card_labels,label,read,58,20,38,107,1,0.542,9,LOW
+get_label,label,read,52,15,37,105,0,0.495,8,LOW
+get_member_boards,member,read,50,8,42,127,1,0.394,8,LOW
+get_board_members,board,read,49,14,35,94,1,0.521,7,LOW
+get_attachments,card,read,21,20,1,2,1,10.500,3,LOW
+get_card_members,card,read,21,20,1,2,0,10.500,3,LOW
+
+SUMMARY STATISTICS
+Total Operations,18
+Total Tokens,7123
+Average Tokens/Operation,396
+Median Tokens,129
+Maximum Tokens,2103
+Minimum Tokens,21
+Total Response Size,21420 bytes
+Average Response Size,1190 bytes
+
+CATEGORY AVERAGES
+Card Operations Average,682 tokens
+Board Operations Average,522 tokens
+Checklist Operations Average,520 tokens
+Member Operations Average,105 tokens
+List Operations Average,91 tokens
+Label Operations Average,55 tokens
+Search Operations Average,71 tokens
+
+OPTIMIZATION TARGETS
+Current Average,396 tokens/operation
+60% Reduction Target,158 tokens/operation
+70% Reduction Target,119 tokens/operation
+85% Reduction Target,59 tokens/operation
+90% Reduction Target,40 tokens/operation
+
+TOKEN HOTSPOTS (>1000 tokens)
+get_cards_in_list,2103 tokens,47% of card tokens
+get_board,1262 tokens,60% of board tokens

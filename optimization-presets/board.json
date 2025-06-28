@@ -1,0 +1,57 @@
+{
+  "entity": "board",
+  "description": "Optimization presets for Trello board operations",
+  "presets": {
+    "minimal": {
+      "description": "Essential board information only",
+      "include": ["id", "name", "closed", "url", "shortUrl"]
+    },
+    "standard": {
+      "description": "Common fields for typical board operations",
+      "include": [
+        "id", "name", "desc", "descData", "closed", "idOrganization",
+        "url", "shortUrl", "shortLink", "dateLastActivity", "dateLastView"
+      ]
+    },
+    "detailed": {
+      "description": "Most fields except heavy nested objects",
+      "exclude": [
+        "prefs", "labelNames", "backgroundImageScaled", "limits", 
+        "powerUps", "premiumFeatures", "templateGallery", "ixUpdate", 
+        "nodeId", "switcherViews"
+      ]
+    }
+  },
+  "fieldMappings": {
+    "prefs": {
+      "tokenImpact": "high",
+      "importance": "low",
+      "estimatedTokens": 500,
+      "description": "Board preferences - 30+ nested fields"
+    },
+    "labelNames": {
+      "tokenImpact": "medium",
+      "importance": "medium",
+      "estimatedTokens": 200,
+      "description": "Label color variations - 30 fields"
+    },
+    "backgroundImageScaled": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 150,
+      "description": "Multiple image size URLs"
+    },
+    "limits": {
+      "tokenImpact": "medium",
+      "importance": "low",
+      "estimatedTokens": 100,
+      "description": "API rate limit information"
+    },
+    "powerUps": {
+      "tokenImpact": "low",
+      "importance": "medium",
+      "estimatedTokens": 50,
+      "description": "Enabled power-ups/plugins"
+    }
+  }
+}

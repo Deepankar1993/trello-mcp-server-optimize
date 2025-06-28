@@ -7,6 +7,8 @@
 
 import { TrelloService } from './trello-service.js';
 import { TrelloChecklist, TrelloCheckItem } from '../types/trello-types.js';
+import { RuntimeOptimizationConfig } from '../types/optimization-types.js';
+import { responseOptimizer } from '../utils/response-optimizer.js';
 
 /**
  * Service for interacting with Trello checklists
@@ -25,10 +27,12 @@ export class ChecklistService {
     /**
      * Get a specific checklist by ID
      * @param checklistId - ID of the checklist to retrieve
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the checklist
      */
-    async getChecklist(checklistId: string): Promise<TrelloChecklist> {
-        return this.trelloService.get<TrelloChecklist>(`/checklists/${checklistId}`);
+    async getChecklist(checklistId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloChecklist> {
+        const response = await this.trelloService.get<TrelloChecklist>(`/checklists/${checklistId}`);
+        return responseOptimizer.optimize(response, 'get_checklist', optimization);
     }
 
     /**
@@ -37,13 +41,15 @@ export class ChecklistService {
      * @param name - Name of the checklist
      * @param pos - Position of the checklist (top, bottom, or a positive number)
      * @param idChecklistSource - ID of a checklist to copy from
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the created checklist
      */
     async createChecklist(
         cardId: string,
         name: string,
         pos?: 'top' | 'bottom' | number,
-        idChecklistSource?: string
+        idChecklistSource?: string,
+        optimization?: RuntimeOptimizationConfig
     ): Promise<TrelloChecklist> {
         const data: any = {
             idCard: cardId,
@@ -58,13 +64,15 @@ export class ChecklistService {
             data.idChecklistSource = idChecklistSource;
         }
 
-        return this.trelloService.post<TrelloChecklist>('/checklists', data);
+        const response = await this.trelloService.post<TrelloChecklist>('/checklists', data);
+        return responseOptimizer.optimize(response, 'create_checklist', optimization);
     }
 
     /**
      * Update an existing checklist
      * @param checklistId - ID of the checklist to update
      * @param data - Checklist update data
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated checklist
      */
     async updateChecklist(
@@ -72,9 +80,11 @@ export class ChecklistService {
         data: {
             name?: string;
             pos?: 'top' | 'bottom' | number;
-        }
+        },
+        optimization?: RuntimeOptimizationConfig
     ): Promise<TrelloChecklist> {
-        return this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}`, data);
+        const response = await this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}`, data);
+        return responseOptimizer.optimize(response, 'update_checklist', optimization);
     }
 
     /**
@@ -89,10 +99,12 @@ export class ChecklistService {
     /**
      * Get all checkitems on a checklist
      * @param checklistId - ID of the checklist
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to an array of checkitems
      */
-    async getCheckItems(checklistId: string): Promise<TrelloCheckItem[]> {
-        return this.trelloService.get<TrelloCheckItem[]>(`/checklists/${checklistId}/checkItems`);
+    async getCheckItems(checklistId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCheckItem[]> {
+        const response = await this.trelloService.get<TrelloCheckItem[]>(`/checklists/${checklistId}/checkItems`);
+        return responseOptimizer.optimize(response, 'get_checkitems', optimization);
     }
 
     /**
@@ -103,6 +115,7 @@ export class ChecklistService {
      * @param checked - Whether the checkitem is checked
      * @param due - Due date for the checkitem
      * @param memberId - ID of the member assigned to the checkitem
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the created checkitem
      */
     async createCheckItem(
@@ -111,7 +124,8 @@ export class ChecklistService {
         pos?: 'top' | 'bottom' | number,
         checked?: boolean,
         due?: string,
-        memberId?: string
+        memberId?: string,
+        optimization?: RuntimeOptimizationConfig
     ): Promise<TrelloCheckItem> {
         const data: any = { name };
 
@@ -131,17 +145,20 @@ export class ChecklistService {
             data.idMember = memberId;
         }
 
-        return this.trelloService.post<TrelloCheckItem>(`/checklists/${checklistId}/checkItems`, data);
+        const response = await this.trelloService.post<TrelloCheckItem>(`/checklists/${checklistId}/checkItems`, data);
+        return responseOptimizer.optimize(response, 'create_checkitem', optimization);
     }
 
     /**
      * Get a specific checkitem on a checklist
      * @param checklistId - ID of the checklist
      * @param checkItemId - ID of the checkitem
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the checkitem
      */
-    async getCheckItem(checklistId: string, checkItemId: string): Promise<TrelloCheckItem> {
-        return this.trelloService.get<TrelloCheckItem>(`/checklists/${checklistId}/checkItems/${checkItemId}`);
+    async getCheckItem(checklistId: string, checkItemId: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloCheckItem> {
+        const response = await this.trelloService.get<TrelloCheckItem>(`/checklists/${checklistId}/checkItems/${checkItemId}`);
+        return responseOptimizer.optimize(response, 'get_checkitem', optimization);
     }
 
     /**
@@ -149,6 +166,7 @@ export class ChecklistService {
      * @param checklistId - ID of the checklist
      * @param checkItemId - ID of the checkitem
      * @param data - Checkitem update data
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated checkitem
      */
     async updateCheckItem(
@@ -160,9 +178,11 @@ export class ChecklistService {
             pos?: 'top' | 'bottom' | number;
             due?: string | null;
             idMember?: string | null;
-        }
+        },
+        optimization?: RuntimeOptimizationConfig
     ): Promise<TrelloCheckItem> {
-        return this.trelloService.put<TrelloCheckItem>(`/checklists/${checklistId}/checkItems/${checkItemId}`, data);
+        const response = await this.trelloService.put<TrelloCheckItem>(`/checklists/${checklistId}/checkItems/${checkItemId}`, data);
+        return responseOptimizer.optimize(response, 'update_checkitem', optimization);
     }
 
     /**
@@ -179,38 +199,46 @@ export class ChecklistService {
      * Update the name of a checklist
      * @param checklistId - ID of the checklist
      * @param name - New name for the checklist
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated checklist
      */
-    async updateName(checklistId: string, name: string): Promise<TrelloChecklist> {
-        return this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}/name`, { value: name });
+    async updateName(checklistId: string, name: string, optimization?: RuntimeOptimizationConfig): Promise<TrelloChecklist> {
+        const response = await this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}/name`, { value: name });
+        return responseOptimizer.optimize(response, 'update_checklist_name', optimization);
     }
 
     /**
      * Update the position of a checklist
      * @param checklistId - ID of the checklist
      * @param pos - New position for the checklist
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated checklist
      */
-    async updatePosition(checklistId: string, pos: 'top' | 'bottom' | number): Promise<TrelloChecklist> {
-        return this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}/pos`, { value: pos });
+    async updatePosition(checklistId: string, pos: 'top' | 'bottom' | number, optimization?: RuntimeOptimizationConfig): Promise<TrelloChecklist> {
+        const response = await this.trelloService.put<TrelloChecklist>(`/checklists/${checklistId}/pos`, { value: pos });
+        return responseOptimizer.optimize(response, 'update_checklist_position', optimization);
     }
 
     /**
      * Get the board a checklist is on
      * @param checklistId - ID of the checklist
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the board
      */
-    async getBoard(checklistId: string): Promise<any> {
-        return this.trelloService.get<any>(`/checklists/${checklistId}/board`);
+    async getBoard(checklistId: string, optimization?: RuntimeOptimizationConfig): Promise<any> {
+        const response = await this.trelloService.get<any>(`/checklists/${checklistId}/board`);
+        return responseOptimizer.optimize(response, 'get_checklist_board', optimization);
     }
 
     /**
      * Get the card a checklist is on
      * @param checklistId - ID of the checklist
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the card
      */
-    async getCard(checklistId: string): Promise<any> {
-        return this.trelloService.get<any>(`/checklists/${checklistId}/cards`);
+    async getCard(checklistId: string, optimization?: RuntimeOptimizationConfig): Promise<any> {
+        const response = await this.trelloService.get<any>(`/checklists/${checklistId}/cards`);
+        return responseOptimizer.optimize(response, 'get_checklist_card', optimization);
     }
 
     /**
@@ -218,13 +246,16 @@ export class ChecklistService {
      * @param cardId - ID of the card
      * @param checkItemId - ID of the checkitem
      * @param state - New state for the checkitem
+     * @param optimization - Optional optimization configuration
      * @returns Promise resolving to the updated checkitem
      */
     async updateCheckItemStateOnCard(
         cardId: string,
         checkItemId: string,
-        state: 'complete' | 'incomplete'
+        state: 'complete' | 'incomplete',
+        optimization?: RuntimeOptimizationConfig
     ): Promise<TrelloCheckItem> {
-        return this.trelloService.put<TrelloCheckItem>(`/cards/${cardId}/checkItem/${checkItemId}`, { state });
+        const response = await this.trelloService.put<TrelloCheckItem>(`/cards/${cardId}/checkItem/${checkItemId}`, { state });
+        return responseOptimizer.optimize(response, 'update_checkitem_state_on_card', optimization);
     }
 }

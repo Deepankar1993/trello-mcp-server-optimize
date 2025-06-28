@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for board-related tools
@@ -18,7 +19,17 @@ export const boardToolHandlers = {
      */
     get_boards: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.getBoards(args);
+        const { detailLevel, fields, maxItems, summarize, ...params } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_boards'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return boardService.getBoards({ ...params, optimization });
     },
 
     /**
@@ -28,7 +39,15 @@ export const boardToolHandlers = {
      */
     get_board: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.getBoard(args.boardId);
+        const { boardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board'),
+            fields
+        };
+        
+        return boardService.getBoard(boardId, optimization);
     },
 
     /**
@@ -38,7 +57,15 @@ export const boardToolHandlers = {
      */
     create_board: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.createBoard(args);
+        const { detailLevel, fields, ...params } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_board'),
+            fields
+        };
+        
+        return boardService.createBoard({ ...params, optimization });
     },
 
     /**
@@ -48,8 +75,15 @@ export const boardToolHandlers = {
      */
     update_board: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        const { boardId, ...updateData } = args;
-        return boardService.updateBoard(boardId, updateData);
+        const { boardId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_board'),
+            fields
+        };
+        
+        return boardService.updateBoard(boardId, { ...updateData, optimization });
     },
 
     /**
@@ -74,7 +108,17 @@ export const boardToolHandlers = {
      */
     get_board_lists: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.getLists(args.boardId, args.filter);
+        const { boardId, filter, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board_lists'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return boardService.getLists(boardId, filter, optimization);
     },
 
     /**
@@ -84,7 +128,17 @@ export const boardToolHandlers = {
      */
     get_board_members: async (args: any) => {
         const memberService = ServiceFactory.getInstance().getMemberService();
-        return memberService.getBoardMembers(args.boardId);
+        const { boardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board_members'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return memberService.getBoardMembers(boardId, optimization);
     },
 
     /**
@@ -94,7 +148,17 @@ export const boardToolHandlers = {
      */
     get_board_labels: async (args: any) => {
         const labelService = ServiceFactory.getInstance().getLabelService();
-        return labelService.getBoardLabels(args.boardId);
+        const { boardId, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_board_labels'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return labelService.getBoardLabels(boardId, optimization);
     },
 
     /**
@@ -104,7 +168,15 @@ export const boardToolHandlers = {
      */
     close_board: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.updateBoard(args.boardId, { closed: true });
+        const { boardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('close_board'),
+            fields
+        };
+        
+        return boardService.updateBoard(boardId, { closed: true, optimization });
     },
 
     /**
@@ -114,6 +186,14 @@ export const boardToolHandlers = {
      */
     reopen_board: async (args: any) => {
         const boardService = ServiceFactory.getInstance().getBoardService();
-        return boardService.updateBoard(args.boardId, { closed: false });
+        const { boardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('reopen_board'),
+            fields
+        };
+        
+        return boardService.updateBoard(boardId, { closed: false, optimization });
     }
 };

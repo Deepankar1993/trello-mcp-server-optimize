@@ -1,0 +1,32 @@
+{
+  "entity": "list",
+  "description": "Optimization presets for Trello list operations",
+  "presets": {
+    "minimal": {
+      "description": "Essential list information only",
+      "include": ["id", "name", "closed", "idBoard", "pos"]
+    },
+    "standard": {
+      "description": "Common fields for typical list operations",
+      "include": ["id", "name", "closed", "idBoard", "pos", "subscribed"]
+    },
+    "detailed": {
+      "description": "Most fields except heavy nested objects",
+      "exclude": ["limits", "softLimit"]
+    }
+  },
+  "fieldMappings": {
+    "limits": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 50,
+      "description": "API rate limit information"
+    },
+    "softLimit": {
+      "tokenImpact": "low",
+      "importance": "low",
+      "estimatedTokens": 20,
+      "description": "Soft limit warnings"
+    }
+  }
+}

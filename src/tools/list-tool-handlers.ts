@@ -6,6 +6,7 @@
  */
 
 import { ServiceFactory } from '../services/service-factory.js';
+import { getDefaultOptimizationLevel } from '../utils/tool-optimization-params.js';
 
 /**
  * Handlers for list-related tools
@@ -18,7 +19,15 @@ export const listToolHandlers = {
      */
     get_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.getList(args.listId);
+        const { listId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_list'),
+            fields
+        };
+        
+        return listService.getList(listId, optimization);
     },
 
     /**
@@ -28,7 +37,15 @@ export const listToolHandlers = {
      */
     create_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.createList(args);
+        const { detailLevel, fields, ...createData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('create_list'),
+            fields
+        };
+        
+        return listService.createList(createData, optimization);
     },
 
     /**
@@ -38,8 +55,15 @@ export const listToolHandlers = {
      */
     update_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        const { listId, ...updateData } = args;
-        return listService.updateList(listId, updateData);
+        const { listId, detailLevel, fields, ...updateData } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_list'),
+            fields
+        };
+        
+        return listService.updateList(listId, updateData, optimization);
     },
 
     /**
@@ -49,7 +73,15 @@ export const listToolHandlers = {
      */
     archive_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.archiveList(args.listId);
+        const { listId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('archive_list'),
+            fields
+        };
+        
+        return listService.archiveList(listId, optimization);
     },
 
     /**
@@ -59,7 +91,15 @@ export const listToolHandlers = {
      */
     unarchive_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.unarchiveList(args.listId);
+        const { listId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('unarchive_list'),
+            fields
+        };
+        
+        return listService.unarchiveList(listId, optimization);
     },
 
     /**
@@ -69,7 +109,15 @@ export const listToolHandlers = {
      */
     move_list_to_board: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.moveListToBoard(args.listId, args.boardId);
+        const { listId, boardId, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('move_list_to_board'),
+            fields
+        };
+        
+        return listService.moveListToBoard(listId, boardId, optimization);
     },
 
     /**
@@ -79,7 +127,17 @@ export const listToolHandlers = {
      */
     get_cards_in_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.getCards(args.listId, args.filter);
+        const { listId, filter, detailLevel, fields, maxItems, summarize } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('get_cards_in_list'),
+            fields,
+            maxItems,
+            summarize
+        };
+        
+        return listService.getCards(listId, filter, optimization);
     },
 
     /**
@@ -111,7 +169,15 @@ export const listToolHandlers = {
      */
     update_list_position: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.updatePosition(args.listId, args.position);
+        const { listId, position, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_list_position'),
+            fields
+        };
+        
+        return listService.updatePosition(listId, position, optimization);
     },
 
     /**
@@ -121,7 +187,15 @@ export const listToolHandlers = {
      */
     update_list_name: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.updateName(args.listId, args.name);
+        const { listId, name, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('update_list_name'),
+            fields
+        };
+        
+        return listService.updateName(listId, name, optimization);
     },
 
     /**
@@ -131,6 +205,14 @@ export const listToolHandlers = {
      */
     subscribe_to_list: async (args: any) => {
         const listService = ServiceFactory.getInstance().getListService();
-        return listService.updateSubscribed(args.listId, args.subscribed);
+        const { listId, subscribed, detailLevel, fields } = args;
+        
+        // Apply smart default if no detail level specified
+        const optimization = {
+            level: detailLevel || getDefaultOptimizationLevel('subscribe_to_list'),
+            fields
+        };
+        
+        return listService.updateSubscribed(listId, subscribed, optimization);
     }
 };

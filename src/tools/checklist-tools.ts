@@ -9,6 +9,8 @@
  * Defines the tools related to Trello checklists
  * Each tool has a name, description, and input schema following JSON Schema format
  */
+import { getOptimizationParamsForOperation, operationTypeMap } from '../utils/tool-optimization-params.js';
+
 export const checklistTools = [
     {
         name: "get_checklist",
@@ -20,7 +22,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checklist to retrieve"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_checklist)},
             required: ["checklistId"]
         }
     },
@@ -46,7 +49,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of a checklist to copy from"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_checklist)},
             required: ["cardId", "name"]
         }
     },
@@ -68,7 +72,8 @@ export const checklistTools = [
                     type: ["string", "number"],
                     description: "New position for the checklist (top, bottom, or a positive number)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_checklist)},
             required: ["checklistId"]
         }
     },
@@ -82,7 +87,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checklist to delete"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_checklist)},
             required: ["checklistId"]
         }
     },
@@ -96,7 +102,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checklist"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_checkitems)},
             required: ["checklistId"]
         }
     },
@@ -130,7 +137,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the member assigned to the checkitem"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.create_checkitem)},
             required: ["checklistId", "name"]
         }
     },
@@ -148,7 +156,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checkitem"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_checkitem)},
             required: ["checklistId", "checkItemId"]
         }
     },
@@ -187,7 +196,8 @@ export const checklistTools = [
                     type: ["string", "null"],
                     description: "ID of the member to assign to the checkitem, or null to remove"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_checkitem)},
             required: ["checklistId", "checkItemId"]
         }
     },
@@ -205,7 +215,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checkitem to delete"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.delete_checkitem)},
             required: ["checklistId", "checkItemId"]
         }
     },
@@ -223,7 +234,8 @@ export const checklistTools = [
                     type: "string",
                     description: "New name for the checklist"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_checklist_name)},
             required: ["checklistId", "name"]
         }
     },
@@ -241,7 +253,8 @@ export const checklistTools = [
                     type: ["string", "number"],
                     description: "New position for the checklist (top, bottom, or a positive number)"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_checklist_position)},
             required: ["checklistId", "position"]
         }
     },
@@ -255,7 +268,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checklist"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_checklist_board)},
             required: ["checklistId"]
         }
     },
@@ -269,7 +283,8 @@ export const checklistTools = [
                     type: "string",
                     description: "ID of the checklist"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.get_checklist_card)},
             required: ["checklistId"]
         }
     },
@@ -292,7 +307,8 @@ export const checklistTools = [
                     enum: ["complete", "incomplete"],
                     description: "New state for the checkitem"
                 }
-            },
+            ,
+                ...getOptimizationParamsForOperation(operationTypeMap.update_checkitem_state_on_card)},
             required: ["cardId", "checkItemId", "state"]
         }
     }

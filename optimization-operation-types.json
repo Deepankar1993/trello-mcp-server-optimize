@@ -1,0 +1,111 @@
+{
+  "operationTypes": {
+    "LIST": {
+      "description": "Operations that return multiple items",
+      "defaultLevel": "minimal",
+      "operations": [
+        "get_boards",
+        "get_board_lists",
+        "get_board_members",
+        "get_board_labels",
+        "get_cards_in_list",
+        "get_comments",
+        "get_attachments",
+        "get_member_boards",
+        "get_member_cards",
+        "get_boards_invited",
+        "get_member_organizations",
+        "get_notifications",
+        "search_members",
+        "get_organization_members",
+        "get_card_members",
+        "get_card_labels",
+        "get_checkitems"
+      ]
+    },
+    "DETAIL": {
+      "description": "Operations that return single item details",
+      "defaultLevel": "standard",
+      "operations": [
+        "get_board",
+        "get_list",
+        "get_card",
+        "get_me",
+        "get_member",
+        "get_avatar",
+        "get_label",
+        "get_checklist",
+        "get_checkitem",
+        "get_checklist_board",
+        "get_checklist_card"
+      ]
+    },
+    "ADMIN": {
+      "description": "Operations that create, update, or delete entities",
+      "defaultLevel": "detailed",
+      "operations": [
+        "create_board",
+        "update_board",
+        "delete_board",
+        "create_list",
+        "update_list",
+        "create_card",
+        "update_card",
+        "delete_card",
+        "update_me",
+        "create_label",
+        "update_label",
+        "delete_label",
+        "create_label_on_card",
+        "create_checklist",
+        "update_checklist",
+        "delete_checklist",
+        "create_checkitem",
+        "update_checkitem",
+        "delete_checkitem"
+      ]
+    },
+    "ACTION": {
+      "description": "Operations that perform actions without returning significant data",
+      "defaultLevel": "minimal",
+      "operations": [
+        "close_board",
+        "reopen_board",
+        "archive_list",
+        "unarchive_list",
+        "move_list_to_board",
+        "archive_all_cards",
+        "move_all_cards",
+        "update_list_position",
+        "update_list_name",
+        "subscribe_to_list",
+        "archive_card",
+        "unarchive_card",
+        "move_card_to_list",
+        "add_comment",
+        "add_attachment",
+        "delete_attachment",
+        "add_member",
+        "remove_member",
+        "add_label",
+        "remove_label",
+        "set_due_date",
+        "set_due_complete",
+        "update_label_name",
+        "update_label_color",
+        "add_label_to_card",
+        "remove_label_from_card",
+        "update_checklist_name",
+        "update_checklist_position",
+        "update_checkitem_state_on_card"
+      ]
+    }
+  },
+  "summary": {
+    "LIST": 17,
+    "DETAIL": 11,
+    "ADMIN": 19,
+    "ACTION": 28,
+    "total": 75
+  }
+}
