@@ -2,6 +2,8 @@
 
 A Model Context Protocol (MCP) server that provides tools for interacting with the Trello API. Built on the Generic MCP Server Template.
 
+**Repository**: [https://github.com/Deepankar1993/trello-mcp-server-optimize](https://github.com/Deepankar1993/trello-mcp-server-optimize)
+
 ## Features
 
 - **Trello Integration**: Complete access to Trello boards, lists, cards, and more
@@ -16,6 +18,15 @@ A Model Context Protocol (MCP) server that provides tools for interacting with t
 - **Response Summarization**: Human-readable summaries with statistics
 - **Content Truncation**: Intelligent text truncation for long descriptions
 - **Performance Monitoring**: Real-time metrics and reporting
+
+## Documentation
+
+- [Architecture Guide](docs/ARCHITECTURE.md) - System design and components
+- [API Reference](docs/API_REFERENCE.md) - Complete tool documentation
+- [Deployment Guide](docs/DEPLOYMENT.md) - Installation and setup instructions
+- [Optimization Guide](docs/OPTIMIZATION_GUIDE.md) - Token reduction strategies
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
+- [Migration Guide](docs/MIGRATION_GUIDE.md) - Upgrading from v1.0
 
 ## Project Structure
 
@@ -77,8 +88,8 @@ trello-mcp-server/
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/trello-mcp-server.git
-   cd trello-mcp-server
+   git clone https://github.com/Deepankar1993/trello-mcp-server-optimize.git
+   cd trello-mcp-server-optimize
    ```
 
 2. Install dependencies:
@@ -401,7 +412,7 @@ To start using optimization features:
 - **Cache Hit Rate**: Improves with usage
 - **Compatibility**: 100% backward compatible
 
-See [Performance Report](docs/PERFORMANCE_REPORT.md) for detailed benchmarks.
+See the performance metrics in our [documentation](docs/OPTIMIZATION_GUIDE.md#performance-metrics) for detailed benchmarks.
 
 ## Testing
 
@@ -501,4 +512,4 @@ The server includes comprehensive error handling:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/v4lheru/trello-mcp-server/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Deepankar1993/trello-mcp-server-optimize/blob/master/LICENSE) file for details.

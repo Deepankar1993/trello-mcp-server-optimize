@@ -32,6 +32,14 @@
     ],
     "author": "",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Deepankar1993/trello-mcp-server-optimize.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Deepankar1993/trello-mcp-server-optimize/issues"
+    },
+    "homepage": "https://github.com/Deepankar1993/trello-mcp-server-optimize#readme",
     "dependencies": {
         "@modelcontextprotocol/sdk": "0.6.0",
         "axios": "^1.6.7",
