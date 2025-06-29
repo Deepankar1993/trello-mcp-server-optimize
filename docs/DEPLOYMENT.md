@@ -29,11 +29,11 @@
 
 ### Method 1: From NPM (Recommended)
 ```bash
-# Install globally
-npm install -g trello-mcp-server
+# For Claude Desktop - Add to configuration (see Integration section below)
+# No global installation needed - uses npx
 
-# Or install locally
-npm install trello-mcp-server
+# For development or local use
+npm install @cyberdeep/trello-mcp-server-optimize
 ```
 
 ### Method 2: From Source
@@ -49,10 +49,10 @@ npm install
 npm run build
 ```
 
-### Method 3: Using npx
+### Method 3: Using npx (Recommended for Claude Desktop)
 ```bash
 # Run without installation
-npx trello-mcp-server
+npx @cyberdeep/trello-mcp-server-optimize
 ```
 
 ## Configuration
@@ -182,18 +182,38 @@ sudo systemctl start trello-mcp
 ## Integration with AI Assistants
 
 ### Claude Desktop
-1. Open Claude Desktop settings
-2. Navigate to Developer → MCP Servers
-3. Add configuration:
+
+#### Option 1: Using Claude MCP CLI (Easiest)
+```bash
+# One command installation
+claude mcp add-json trello-optimized --scope user '{
+  "command": "npx",
+  "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+  "env": {
+    "TRELLO_API_KEY": "your_actual_api_key",
+    "TRELLO_TOKEN": "your_actual_token"
+  }
+}'
+```
+
+#### Option 2: Manual Configuration
+1. Open Claude Desktop configuration file:
+   - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+   - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - **Linux:** `~/.config/claude/claude_desktop_config.json`
+
+2. Add configuration:
 
 ```json
 {
-  "trello": {
-    "command": "npx",
-    "args": ["trello-mcp-server"],
-    "env": {
-      "TRELLO_API_KEY": "${TRELLO_API_KEY}",
-      "TRELLO_TOKEN": "${TRELLO_TOKEN}"
+  "mcpServers": {
+    "trello-optimized": {
+      "command": "npx",
+      "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+      "env": {
+        "TRELLO_API_KEY": "your_actual_api_key",
+        "TRELLO_TOKEN": "your_actual_token"
+      }
     }
   }
 }
@@ -208,8 +228,8 @@ Add to `.continue/config.json`:
     "model": "claude-3",
     "mcpServers": {
       "trello": {
-        "command": "node",
-        "args": ["path/to/trello-mcp-server/build/index.js"]
+        "command": "npx",
+        "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"]
       }
     }
   }]
@@ -224,7 +244,7 @@ const client = new MCPClient({
   servers: {
     trello: {
       command: 'npx',
-      args: ['trello-mcp-server'],
+      args: ['-y', '@cyberdeep/trello-mcp-server-optimize'],
       env: {
         TRELLO_API_KEY: process.env.TRELLO_API_KEY,
         TRELLO_TOKEN: process.env.TRELLO_TOKEN
@@ -426,7 +446,7 @@ set DEBUG=* && npm start
 npm outdated
 
 # Update to latest
-npm update trello-mcp-server
+npm update @cyberdeep/trello-mcp-server-optimize
 
 # Update dependencies
 npm update

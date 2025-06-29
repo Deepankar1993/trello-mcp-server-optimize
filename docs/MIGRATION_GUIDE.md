@@ -75,16 +75,14 @@ New environment variables:
 
 #### Step 1: Update Dependencies
 ```bash
-# Backup current version
-npm list trello-mcp-server > version-backup.txt
+# For existing installations
+npm list @cyberdeep/trello-mcp-server-optimize > version-backup.txt
 
-# Update to v1.0
-npm update trello-mcp-server@^1.0.0
+# Update to latest version
+npm update @cyberdeep/trello-mcp-server-optimize
 
-# Or for source installations
-git pull origin main
-npm install
-npm run build
+# Or for Claude Desktop users - update your configuration:
+# Simply restart Claude Desktop to get the latest version via npx
 ```
 
 #### Step 2: Update Configuration

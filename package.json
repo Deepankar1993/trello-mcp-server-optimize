@@ -1,12 +1,12 @@
 {
-    "name": "trello-mcp-server",
+    "name": "@cyberdeep/trello-mcp-server-optimize",
     "version": "1.0.0",
     "private": false,
-    "description": "Trello MCP Server - A Model Context Protocol server for interacting with the Trello API",
+    "description": "Token-optimized Trello MCP Server with 97% response reduction",
     "type": "module",
     "main": "build/index.js",
     "bin": {
-        "trello-mcp-server": "build/index.js"
+        "trello-mcp-optimize": "build/index.js"
     },
     "files": [
         "build",
@@ -18,17 +18,21 @@
         "start": "node build/index.js",
         "dev": "tsc -w",
         "prepare": "npm run build",
+        "prepublishOnly": "npm run build",
         "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
         "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
         "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage"
     },
     "keywords": [
         "mcp",
-        "ai",
-        "model-context-protocol",
         "trello",
-        "server",
-        "api"
+        "model-context-protocol",
+        "claude",
+        "ai",
+        "optimization",
+        "token-efficient",
+        "api",
+        "server"
     ],
     "author": "Deepankar1993",
     "license": "MIT",
