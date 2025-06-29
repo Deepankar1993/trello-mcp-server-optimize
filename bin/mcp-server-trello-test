@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+// Log to stderr to help debug
+process.stderr.write('[DEBUG] MCP Server starting via wrapper...\n');
+
+// Import the main module
+import('../build/index.js').catch(err => {
+    process.stderr.write(`[ERROR] Failed to import main module: ${err.message}\n`);
+    process.exit(1);
+});

@@ -30,7 +30,7 @@ import {
     ErrorCode
 } from "@modelcontextprotocol/sdk/types.js";
 
-import config from "./config.js";
+import config, { validateConfig } from "./config.js";
 import { ServiceFactory } from "./services/service-factory.js";
 import { TrelloService } from "./services/trello-service.js";
 import { trelloTools } from "./tools/trello-tools.js";
@@ -54,7 +54,35 @@ console.error = (...args) => {
  */
 async function main() {
     try {
-        console.log("Initializing Trello MCP Server...");
+        // Remove startup log that could interfere with MCP protocol
+
+        // Validate configuration first
+        try {
+            validateConfig(config);
+        } catch (configError) {
+            // For config errors, we need to handle them gracefully
+            // Create a minimal server that can respond with an error
+            const server = new Server(
+                {
+                    name: "trello-mcp-server",
+                    version: "0.1.0",
+                },
+                {
+                    capabilities: {
+                        tools: {},
+                        resources: {},
+                        prompts: {}
+                    }
+                }
+            );
+            
+            const transport = new StdioServerTransport();
+            await server.connect(transport);
+            
+            // Server is connected but not functional due to missing config
+            // It will respond to requests with errors
+            return;
+        }
 
         // Initialize services and service factory
         const serviceFactory = ServiceFactory.initialize(
@@ -176,9 +204,10 @@ async function main() {
         const transport = new StdioServerTransport();
         await server.connect(transport);
 
-        console.log("Trello MCP Server running on stdio");
+        // Server is now running - no need to log as it could interfere with protocol
     } catch (error) {
-        console.error("Failed to start server:", error);
+        // Use originalConsoleError to ensure it goes to stderr
+        originalConsoleError("Failed to start server:", error);
         process.exit(1);
     }
 }

@@ -119,7 +119,6 @@ const validateConfig = (config: Config): void => {
     }
 };
 
-// Validate configuration
-validateConfig(configuration);
-
+// Export configuration without validation - let main() handle it
 export default configuration;
+export { validateConfig };

@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+// Import and start the server
+import('../build/index.js').catch(err => {
+    process.stderr.write(`[ERROR] Failed to start MCP server: ${err.message}\n`);
+    process.exit(1);
+});
