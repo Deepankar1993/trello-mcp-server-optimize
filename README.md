@@ -84,7 +84,22 @@ trello-mcp-server/
 - npm or yarn
 - Trello API key and token
 
-### Installation
+### Quick Start with Claude MCP CLI
+
+The easiest way to add this server to Claude Desktop is using the Claude MCP CLI:
+
+```bash
+# Install the CLI globally
+npm install -g claude-mcp-cli
+
+# Add the Trello MCP server
+claude-mcp add trello-mcp-server
+
+# Or add from a custom configuration
+claude-mcp add-json ./trello-config.json
+```
+
+### Manual Installation
 
 1. Clone this repository:
    ```bash
