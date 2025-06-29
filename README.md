@@ -153,8 +153,11 @@ trello-mcp-server/
 **⚠️ Known Issue**: The Claude MCP CLI may not properly save environment variables. If you encounter authentication errors, use the setup script or manual configuration below.
 
 ```bash
-# Use our setup script (recommended)
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-claude-mcp.sh | bash
+# Use our setup script (recommended) - Interactive mode
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-claude-mcp.sh -o setup-claude-mcp.sh && chmod +x setup-claude-mcp.sh && ./setup-claude-mcp.sh
+
+# Or with credentials directly
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-claude-mcp.sh | bash -s "your_api_key" "your_token"
 
 # Or manually with claude mcp (may not save env vars)
 claude mcp add-json trello-optimized --scope user '{
