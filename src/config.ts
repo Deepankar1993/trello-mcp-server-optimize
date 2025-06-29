@@ -32,7 +32,7 @@ for (let i = 0; i < args.length; i++) {
  */
 export interface Config {
     // API Keys and Authentication
-    apiKey: string;
+    apiKey?: string; // Optional - kept for backward compatibility
 
     // Trello Configuration
     trello: {
@@ -104,12 +104,7 @@ const configuration: Config = {
 const validateConfig = (config: Config): void => {
     const missingEnvVars: string[] = [];
 
-    // Check top-level required fields
-    if (!config.apiKey) {
-        missingEnvVars.push('API_KEY');
-    }
-
-    // Check Trello configuration
+    // Check Trello configuration (only required fields)
     if (!config.trello.apiKey) {
         missingEnvVars.push('TRELLO_API_KEY');
     }
