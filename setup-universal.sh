@@ -162,7 +162,7 @@ EOF
     
     # Add to Claude CLI
     echo "Adding to Claude CLI..."
-    claude mcp add "$WRAPPER_DIR/trello-mcp-cli.sh" --name "trello-mcp-server"
+    claude mcp add trello-mcp-server "$WRAPPER_DIR/trello-mcp-cli.sh" --scope user
     
     if [ $? -eq 0 ]; then
         echo "✓ Claude CLI setup complete"
