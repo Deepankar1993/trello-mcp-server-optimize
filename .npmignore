@@ -1,51 +1,57 @@
-# Source files
+# Source files (TypeScript)
 src/
 *.ts
 !*.d.ts
 
 # Test files
 __tests__/
-*.test.js
 *.test.ts
-jest.config.js
+*.test.js
+*.spec.ts
+*.spec.js
 coverage/
+jest.config.js
+
+# Documentation
+docs/
+documentation/
+issues/
+*.md
+!README.md
+!LICENSE
+CLAUDE.md
+Instructions for LLM.md
+PROJECT_COMPLETION_SUMMARY.md
+PROJECT_PLAN.md
 
 # Development files
 .env
 .env.*
 !.env.example
-*.log
-.DS_Store
-
-# Documentation source
-cline_docs/
 .claude/
-phase-*.md
-*-report.json
-*-measurements.js
-*-metrics-structured.csv
-*-raw-measurements.json
-*-summary.json
-
-# Test scripts
-test-*.js
-run-*.js
-
-# Development configs
-tsconfig.json
-optimization.config.json
-optimization-operation-types.json
-optimization-presets/
-
-# Git
 .git/
 .gitignore
+.vscode/
+.idea/
+*.log
 
-# Project planning
-PROJECT_PLAN.md
-test-scenarios.md
-top-10-token-analysis.md
-phase-*-completion-summary.md
+# Scripts and configuration
+scripts/
+reports/
+optimization-presets/
+optimization.config.json
+optimization-operation-types.json
+tsconfig.json
 
-# Build artifacts not needed
+# Dependencies
+node_modules/
+
+# Misc
+.DS_Store
+*.swp
+*.swo
+*~
 *.map
+
+# Old references
+cline_docs/
