@@ -1,12 +1,12 @@
 {
     "name": "@cyberdeep/trello-mcp-server-optimize",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "private": false,
     "description": "Token-optimized Trello MCP Server with 97% response reduction",
     "type": "module",
     "main": "build/index.js",
     "bin": {
-        "mcp-server-trello": "bin/mcp-server-trello.mjs"
+        "mcp-server-trello": "build/index.js"
     },
     "files": [
         "build",
