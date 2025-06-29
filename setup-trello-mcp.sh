@@ -40,11 +40,28 @@ fi
 
 # Install the package globally
 print_color "$YELLOW" "Installing Trello MCP Server globally..."
-if npm install -g @cyberdeep/trello-mcp-server-optimize; then
+
+# Try to install without sudo first
+if npm install -g @cyberdeep/trello-mcp-server-optimize 2>/dev/null; then
     print_color "$GREEN" "✓ Installation successful!"
 else
-    print_color "$RED" "✗ Installation failed. Please check your npm permissions."
-    exit 1
+    # If that fails, check if we can use sudo
+    if [ "$EUID" -ne 0 ] && command -v sudo &> /dev/null; then
+        print_color "$YELLOW" "Installation requires elevated permissions. Attempting with sudo..."
+        if sudo npm install -g @cyberdeep/trello-mcp-server-optimize; then
+            print_color "$GREEN" "✓ Installation successful!"
+        else
+            print_color "$RED" "✗ Installation failed even with sudo."
+            print_color "$YELLOW" "Try running: sudo npm install -g @cyberdeep/trello-mcp-server-optimize"
+            exit 1
+        fi
+    else
+        print_color "$RED" "✗ Installation failed. Please check your npm permissions."
+        print_color "$YELLOW" "Try one of these commands:"
+        echo "  1. sudo npm install -g @cyberdeep/trello-mcp-server-optimize"
+        echo "  2. npm config set prefix ~/.npm-global && npm install -g @cyberdeep/trello-mcp-server-optimize"
+        exit 1
+    fi
 fi
 
 echo

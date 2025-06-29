@@ -29,13 +29,27 @@ node setup.js
 ### Option 2: Unix/Linux/macOS
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh | bash
+# Download and run the script
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh -o setup-trello-mcp.sh
+chmod +x setup-trello-mcp.sh
+./setup-trello-mcp.sh
+```
+
+Or if you need sudo permissions:
+
+```bash
+# Download first, then run with proper permissions
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh -o setup-trello-mcp.sh
+chmod +x setup-trello-mcp.sh
+sudo ./setup-trello-mcp.sh
 ```
 
 Or if you've cloned the repository:
 
 ```bash
 ./setup-trello-mcp.sh
+# or with sudo if needed
+sudo ./setup-trello-mcp.sh
 ```
 
 ### Option 3: Windows
@@ -80,7 +94,31 @@ After setup, restart Claude Code and check if "trello-optimized" appears in your
 
 ## Troubleshooting
 
-- **Permission errors**: Run the install command with `sudo` on Unix/macOS or as Administrator on Windows
+### Permission Errors
+
+If you get npm permission errors, you have several options:
+
+1. **Use sudo (Linux/macOS)**:
+   ```bash
+   sudo npm install -g @cyberdeep/trello-mcp-server-optimize
+   ```
+
+2. **Configure npm to use a different directory** (recommended):
+   ```bash
+   mkdir ~/.npm-global
+   npm config set prefix '~/.npm-global'
+   echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+   source ~/.bashrc
+   npm install -g @cyberdeep/trello-mcp-server-optimize
+   ```
+
+3. **Fix npm permissions**:
+   ```bash
+   sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+   ```
+
+### Other Issues
+
 - **Claude CLI not found**: Make sure you've installed it globally with `npm install -g @anthropic-ai/claude-cli`
 - **Server not connecting**: Ensure your API credentials are correct and have the necessary permissions
 
