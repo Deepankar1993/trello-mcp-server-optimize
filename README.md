@@ -142,11 +142,30 @@ trello-mcp-server/
 
 ## 🚀 Installation
 
-### ⚡ Quick Start (30 seconds)
+### ⚡ Quick Start (Universal Setup Script)
 
-#### Get Trello API Credentials
+Works on **WSL, Linux, and macOS** for both Claude Desktop and Claude CLI:
+
+```bash
+# Download and run the setup script
+curl -O https://raw.githubusercontent.com/cyberdeep/trello-mcp-server-optimize/master/setup-universal.sh
+chmod +x setup-universal.sh
+./setup-universal.sh
+```
+
+The script will:
+- ✅ Detect your operating system automatically
+- ✅ Configure for Claude Desktop and/or Claude CLI
+- ✅ Set up your Trello credentials securely
+- ✅ Handle all platform-specific configurations
+
+### Get Trello API Credentials
 1. Visit [Trello Developer Portal](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/)
 2. Get your **API Key** and **Token**
+
+### Manual Installation Options
+
+For detailed manual installation instructions for your specific platform, see [INSTALL.md](./INSTALL.md).
 
 #### Option 1: Claude MCP CLI (Easiest - One Command)
 
