@@ -8,8 +8,20 @@
 
 **Solutions**:
 
-1. **Check Claude Code Configuration**
-   - Open your Claude Code settings (usually at `~/.config/claude/claude_desktop_config.json` on macOS/Linux or `%APPDATA%\Claude\claude_desktop_config.json` on Windows)
+1. **Use the Setup Script (Recommended)**
+   The provided setup script now directly modifies the Claude configuration file:
+   ```bash
+   ./setup-claude-mcp.sh
+   ```
+   
+   Or with credentials as arguments:
+   ```bash
+   ./setup-claude-mcp.sh YOUR_API_KEY YOUR_TOKEN
+   ```
+
+2. **Check Claude Code Configuration**
+   - The configuration file is located at `~/.claude.json` on Linux/macOS
+   - On Windows, check `%USERPROFILE%\.claude.json`
    - Add the Trello MCP server configuration:
 
    ```json

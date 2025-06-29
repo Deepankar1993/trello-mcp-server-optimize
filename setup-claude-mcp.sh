@@ -27,85 +27,110 @@ if [ -z "$TRELLO_API_KEY" ] || [ -z "$TRELLO_TOKEN" ]; then
 fi
 
 echo ""
-echo "Adding Trello MCP server to Claude Code..."
+echo "Configuring Trello MCP server..."
 
-# Method 1: Try the direct add-json command
-echo "Method 1: Using claude mcp add-json..."
-claude mcp add-json trello-optimized --scope user "{
-  \"command\": \"npx\",
-  \"args\": [\"-y\", \"@cyberdeep/trello-mcp-server-optimize\"],
-  \"env\": {
-    \"TRELLO_API_KEY\": \"$TRELLO_API_KEY\",
-    \"TRELLO_TOKEN\": \"$TRELLO_TOKEN\"
-  }
-}" 2>&1
+# Find the Claude configuration file
+CLAUDE_CONFIG="$HOME/.claude.json"
 
-# Check if it worked
-if claude mcp list 2>&1 | grep -q "trello-optimized"; then
-    echo "✓ Successfully added Trello MCP server!"
-    echo ""
-    echo "The server should now be available in Claude Code."
-    echo "You may need to restart Claude Code for changes to take effect."
-    exit 0
+if [ ! -f "$CLAUDE_CONFIG" ]; then
+    echo "Error: Claude configuration file not found at $CLAUDE_CONFIG"
+    echo "Please ensure Claude Code is installed and has been run at least once."
+    exit 1
 fi
 
-echo ""
-echo "Method 1 may not have saved environment variables properly."
-echo ""
+# Backup the original config
+cp "$CLAUDE_CONFIG" "$CLAUDE_CONFIG.backup.$(date +%Y%m%d_%H%M%S)"
+echo "✓ Created backup of configuration file"
 
-# Method 2: Alternative approach using local installation
-echo "Method 2: Setting up local installation..."
-echo ""
-
-# Create a wrapper script that includes environment variables
-WRAPPER_DIR="$HOME/.claude-mcp-wrappers"
-mkdir -p "$WRAPPER_DIR"
-
-cat > "$WRAPPER_DIR/trello-mcp-wrapper.sh" << EOF
-#!/bin/bash
-export TRELLO_API_KEY="$TRELLO_API_KEY"
-export TRELLO_TOKEN="$TRELLO_TOKEN"
-exec npx -y @cyberdeep/trello-mcp-server-optimize
-EOF
-
-chmod +x "$WRAPPER_DIR/trello-mcp-wrapper.sh"
-
-# Add using the wrapper script
-echo "Adding server with wrapper script..."
-claude mcp add-json trello-optimized-wrapped --scope user "{
-  \"command\": \"$WRAPPER_DIR/trello-mcp-wrapper.sh\",
-  \"args\": []
-}" 2>&1
-
-echo ""
-echo "Setup complete!"
-echo ""
-echo "IMPORTANT: The environment variables might not be saved properly by Claude MCP."
-echo ""
-echo "Alternative Manual Setup:"
-echo "========================"
-echo ""
-echo "1. Find your Claude Code configuration file:"
-echo "   - macOS/Linux: ~/.config/claude/claude_desktop_config.json"
-echo "   - Windows: %APPDATA%\\Claude\\claude_desktop_config.json"
-echo ""
-echo "2. Add this configuration manually:"
-echo ""
-cat << EOF
+# Create the new server configuration
+SERVER_CONFIG=$(cat <<EOF
 {
-  "mcpServers": {
-    "trello-mcp-server": {
-      "command": "npx",
-      "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
-      "env": {
-        "TRELLO_API_KEY": "$TRELLO_API_KEY",
-        "TRELLO_TOKEN": "$TRELLO_TOKEN"
-      }
+  "name": "trello-mcp-server",
+  "config": {
+    "command": "npx",
+    "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+    "env": {
+      "TRELLO_API_KEY": "$TRELLO_API_KEY",
+      "TRELLO_TOKEN": "$TRELLO_TOKEN"
     }
   }
 }
 EOF
-echo ""
-echo "3. Restart Claude Code after making changes"
-echo ""
-echo "For more help, see TROUBLESHOOTING.md"
+)
+
+# Use Python to update the JSON file properly
+python3 << PYTHON_SCRIPT
+import json
+import sys
+
+config_file = "$CLAUDE_CONFIG"
+server_name = "trello-mcp-server"
+
+try:
+    # Read the existing configuration
+    with open(config_file, 'r') as f:
+        config = json.load(f)
+    
+    # Ensure userMcpServers exists
+    if 'userMcpServers' not in config:
+        config['userMcpServers'] = {}
+    
+    # Add or update our server configuration
+    config['userMcpServers'][server_name] = {
+        "command": "npx",
+        "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+        "env": {
+            "TRELLO_API_KEY": "$TRELLO_API_KEY",
+            "TRELLO_TOKEN": "$TRELLO_TOKEN"
+        }
+    }
+    
+    # Write the updated configuration
+    with open(config_file, 'w') as f:
+        json.dump(config, f, indent=2)
+    
+    print("✓ Successfully updated Claude configuration")
+    sys.exit(0)
+    
+except Exception as e:
+    print(f"Error updating configuration: {e}")
+    sys.exit(1)
+PYTHON_SCRIPT
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ Setup complete!"
+    echo ""
+    echo "The Trello MCP server has been added to your Claude configuration with:"
+    echo "  - API Key: ${TRELLO_API_KEY:0:10}..."
+    echo "  - Token: ${TRELLO_TOKEN:0:10}..."
+    echo ""
+    echo "IMPORTANT: Restart Claude Code for the changes to take effect."
+    echo ""
+    echo "The server will be available as 'trello-mcp-server' in Claude Code."
+else
+    echo ""
+    echo "❌ Failed to update configuration automatically."
+    echo ""
+    echo "Manual Setup Instructions:"
+    echo "=========================="
+    echo ""
+    echo "1. Open the file: $CLAUDE_CONFIG"
+    echo ""
+    echo "2. Find the \"userMcpServers\" section (or create it if missing)"
+    echo ""
+    echo "3. Add this configuration:"
+    echo ""
+    cat << EOF
+"trello-mcp-server": {
+  "command": "npx",
+  "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+  "env": {
+    "TRELLO_API_KEY": "$TRELLO_API_KEY",
+    "TRELLO_TOKEN": "$TRELLO_TOKEN"
+  }
+}
+EOF
+    echo ""
+    echo "4. Save the file and restart Claude Code"
+fi
