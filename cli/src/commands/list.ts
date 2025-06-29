@@ -4,9 +4,10 @@ import { ConfigManager } from '../utils/config.js';
 
 export const listCommand = new Command('list')
   .description('List all configured MCP servers')
+  .option('-s, --scope <scope>', 'Configuration scope (user or system)', 'user')
   .option('-j, --json', 'Output as JSON')
   .action((options) => {
-    const configManager = new ConfigManager();
+    const configManager = new ConfigManager(options.scope);
 
     try {
       const servers = configManager.listServers();

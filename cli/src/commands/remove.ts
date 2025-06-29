@@ -6,9 +6,10 @@ import { ConfigManager } from '../utils/config.js';
 export const removeCommand = new Command('remove')
   .description('Remove an MCP server from Claude Desktop')
   .argument('[name]', 'Name of the server to remove')
+  .option('-s, --scope <scope>', 'Configuration scope (user or system)', 'user')
   .option('-y, --yes', 'Skip confirmation prompt')
   .action(async (serverName: string | undefined, options) => {
-    const configManager = new ConfigManager();
+    const configManager = new ConfigManager(options.scope);
 
     try {
       // If no name provided, show interactive list

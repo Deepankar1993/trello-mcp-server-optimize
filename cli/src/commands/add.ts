@@ -11,11 +11,12 @@ export const addCommand = new Command('add')
   .description('Add an MCP server to Claude Desktop')
   .argument('[package]', 'NPM package name or path to JSON config')
   .option('-n, --name <name>', 'Custom name for the server')
+  .option('-s, --scope <scope>', 'Configuration scope (user or system)', 'user')
   .option('-y, --yes', 'Skip confirmation prompts')
   .option('--no-install', 'Skip NPM installation (for local packages)')
   .action(async (packageName: string | undefined, options) => {
     const spinner = ora();
-    const configManager = new ConfigManager();
+    const configManager = new ConfigManager(options.scope);
 
     try {
       // Handle add-json subcommand
@@ -80,22 +81,48 @@ export const addCommand = new Command('add')
   });
 
 // Add subcommand for JSON files
-addCommand
-  .command('add-json <jsonFile>')
-  .description('Add an MCP server from a JSON configuration file')
-  .option('-n, --name <name>', 'Custom name for the server')
+const addJsonCommand = addCommand
+  .command('add-json <serverName> [jsonFileOrString]')
+  .description('Add an MCP server from a JSON configuration file or inline JSON')
+  .option('-s, --scope <scope>', 'Configuration scope (user or system)', 'user')
   .option('-y, --yes', 'Skip confirmation prompts')
-  .action(async (jsonFile: string, options) => {
+  .action(async (serverName: string, jsonFileOrString: string | undefined, options) => {
     const spinner = ora();
-    const configManager = new ConfigManager();
+    const configManager = new ConfigManager(options.scope);
     
     try {
-      await addJsonConfig(jsonFile, options, configManager, spinner);
+      // If no second argument, treat serverName as the JSON file path
+      if (!jsonFileOrString) {
+        await addJsonConfig(serverName, { ...options, name: undefined }, configManager, spinner);
+      } else {
+        // Check if it's inline JSON or a file path
+        const trimmed = jsonFileOrString.trim();
+        if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+          // It's inline JSON
+          await addInlineJsonConfig(serverName, trimmed, options, configManager, spinner);
+        } else {
+          // It's a file path
+          await addJsonConfig(jsonFileOrString, { ...options, name: serverName }, configManager, spinner);
+        }
+      }
     } catch (error: any) {
       spinner.fail(chalk.red(error.message));
       process.exit(1);
     }
   });
+
+// Support the original syntax for backward compatibility
+addJsonCommand.addHelpText('after', `
+${chalk.cyan('Examples:')}
+  # From file (original syntax)
+  $ claude-mcp add-json ./config.json
+  
+  # From file with custom name
+  $ claude-mcp add-json my-server ./config.json
+  
+  # Inline JSON
+  $ claude-mcp add-json trello-server '{"command": "npx", "args": ["-y", "@delorenj/mcp-server-trello"]}'
+`);
 
 async function addNpmPackage(
   packageName: string,
@@ -219,6 +246,69 @@ async function addJsonConfig(
         type: 'confirm',
         name: 'confirm',
         message: `Add ${serverName} from ${jsonPath}?`,
+        default: true
+      }
+    ]);
+    
+    if (!confirm) {
+      console.log(chalk.yellow('Cancelled'));
+      return;
+    }
+  }
+
+  // Add to config
+  configManager.addServer(serverName, serverConfig);
+  spinner.succeed(`Added ${serverName} to Claude Desktop configuration`);
+  
+  console.log(chalk.green('\n✓ Server added successfully!'));
+  console.log(chalk.cyan(`Configuration file: ${configManager.getConfigPath()}`));
+  console.log(chalk.yellow('\nRestart Claude Desktop for changes to take effect.'));
+}
+
+async function addInlineJsonConfig(
+  serverName: string,
+  jsonString: string,
+  options: any,
+  configManager: ConfigManager,
+  spinner: ReturnType<typeof ora>
+) {
+  // Check if already exists
+  if (configManager.getServer(serverName)) {
+    throw new Error(`Server '${serverName}' already exists`);
+  }
+
+  spinner.start('Parsing inline JSON configuration...');
+  
+  let jsonConfig: any;
+  try {
+    jsonConfig = JSON.parse(jsonString);
+  } catch (error) {
+    spinner.fail('Invalid JSON format');
+    throw new Error('Failed to parse JSON: ' + (error as Error).message);
+  }
+
+  // Validate JSON structure
+  if (!jsonConfig.command) {
+    throw new Error('JSON must contain a "command" field');
+  }
+
+  const serverConfig: MCPServerConfig = {
+    command: jsonConfig.command,
+    args: jsonConfig.args || [],
+    env: jsonConfig.env || {}
+  };
+
+  // Confirm before adding
+  if (!options.yes) {
+    spinner.stop();
+    console.log(chalk.cyan('\nConfiguration to add:'));
+    console.log(chalk.white(JSON.stringify(serverConfig, null, 2)));
+    
+    const { confirm } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'confirm',
+        message: `Add ${serverName} with this configuration?`,
         default: true
       }
     ]);

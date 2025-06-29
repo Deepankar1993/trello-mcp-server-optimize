@@ -7,8 +7,9 @@ import { ConfigManager } from '../utils/config.js';
 export const validateCommand = new Command('validate')
   .description('Validate MCP server configurations')
   .argument('[name]', 'Name of specific server to validate')
-  .action(async (serverName: string | undefined) => {
-    const configManager = new ConfigManager();
+  .option('-s, --scope <scope>', 'Configuration scope (user or system)', 'user')
+  .action(async (serverName: string | undefined, options) => {
+    const configManager = new ConfigManager(options.scope);
     const spinner = ora();
 
     try {

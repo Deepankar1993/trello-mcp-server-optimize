@@ -15,19 +15,37 @@ export interface ClaudeConfig {
 
 export class ConfigManager {
   private configPath: string;
+  private scope: 'user' | 'system';
 
-  constructor() {
-    // Determine Claude Desktop config location based on platform
+  constructor(scope: 'user' | 'system' = 'user') {
+    this.scope = scope;
+    
+    // Determine Claude Desktop config location based on platform and scope
     const home = homedir();
-    switch (platform()) {
-      case 'darwin': // macOS
-        this.configPath = join(home, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
-        break;
-      case 'win32': // Windows
-        this.configPath = join(home, 'AppData', 'Roaming', 'Claude', 'claude_desktop_config.json');
-        break;
-      default: // Linux and others
-        this.configPath = join(home, '.config', 'claude', 'claude_desktop_config.json');
+    
+    if (scope === 'user') {
+      switch (platform()) {
+        case 'darwin': // macOS
+          this.configPath = join(home, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
+          break;
+        case 'win32': // Windows
+          this.configPath = join(home, 'AppData', 'Roaming', 'Claude', 'claude_desktop_config.json');
+          break;
+        default: // Linux and others
+          this.configPath = join(home, '.config', 'claude', 'claude_desktop_config.json');
+      }
+    } else {
+      // System-wide configuration paths
+      switch (platform()) {
+        case 'darwin': // macOS
+          this.configPath = '/Library/Application Support/Claude/claude_desktop_config.json';
+          break;
+        case 'win32': // Windows
+          this.configPath = join(process.env.PROGRAMDATA || 'C:\\ProgramData', 'Claude', 'claude_desktop_config.json');
+          break;
+        default: // Linux and others
+          this.configPath = '/etc/claude/claude_desktop_config.json';
+      }
     }
   }
 
