@@ -10,21 +10,32 @@ This guide provides the easiest way to install and configure the Trello MCP Serv
    - Get your API Key from: https://trello.com/app-key
    - Generate a Token from the same page
 
-## One-Command Setup
+## Quick Setup
 
-### Quick Install (Recommended - works everywhere)
-
-```bash
-# This single command handles all permissions automatically
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-universal.sh | bash
-```
-
-If you have permission issues, use:
+### Recommended Install Method
 
 ```bash
-# This works even with strict permissions
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-universal.sh | sudo bash
+# One-line install command
+curl -O https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/install.sh && chmod +x install.sh && ./install.sh
 ```
+
+Or step by step:
+
+```bash
+# Download the installer
+curl -O https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/install.sh
+
+# Make it executable
+chmod +x install.sh
+
+# Run it (use sudo if you get permission errors)
+./install.sh
+```
+
+The installer will:
+1. Install the Trello MCP server globally
+2. Prompt you for your Trello API credentials
+3. Configure Claude Code automatically
 
 ### Alternative Methods
 
