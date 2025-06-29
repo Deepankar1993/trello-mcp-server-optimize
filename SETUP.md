@@ -12,9 +12,23 @@ This guide provides the easiest way to install and configure the Trello MCP Serv
 
 ## One-Command Setup
 
-We provide setup scripts for different platforms:
+### Quick Install (Recommended - works everywhere)
 
-### Option 1: Cross-Platform (Recommended)
+```bash
+# This single command handles all permissions automatically
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-universal.sh | bash
+```
+
+If you have permission issues, use:
+
+```bash
+# This works even with strict permissions
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-universal.sh | sudo bash
+```
+
+### Alternative Methods
+
+#### Option 1: Cross-Platform Node.js
 
 ```bash
 npx @cyberdeep/trello-mcp-server-optimize setup
@@ -26,30 +40,15 @@ Or if you've cloned the repository:
 node setup.js
 ```
 
-### Option 2: Unix/Linux/macOS
+#### Option 2: Manual Download
 
 ```bash
-# Download and run the script
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh -o setup-trello-mcp.sh
-chmod +x setup-trello-mcp.sh
-./setup-trello-mcp.sh
-```
-
-Or if you need sudo permissions:
-
-```bash
-# Download first, then run with proper permissions
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh -o setup-trello-mcp.sh
-chmod +x setup-trello-mcp.sh
-sudo ./setup-trello-mcp.sh
-```
-
-Or if you've cloned the repository:
-
-```bash
-./setup-trello-mcp.sh
-# or with sudo if needed
-sudo ./setup-trello-mcp.sh
+# Download the script
+curl -O https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-universal.sh
+# Make it executable
+chmod +x setup-universal.sh
+# Run it
+./setup-universal.sh
 ```
 
 ### Option 3: Windows
