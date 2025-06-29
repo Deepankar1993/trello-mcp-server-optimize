@@ -1,6 +1,6 @@
 {
     "name": "@cyberdeep/trello-mcp-server-optimize",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "private": false,
     "description": "Token-optimized Trello MCP Server with 97% response reduction",
     "type": "module",
