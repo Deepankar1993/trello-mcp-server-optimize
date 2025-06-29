@@ -149,8 +149,14 @@ trello-mcp-server/
 2. Get your **API Key** and **Token**
 
 #### Option 1: Claude MCP CLI (Easiest - One Command)
+
+**⚠️ Known Issue**: The Claude MCP CLI may not properly save environment variables. If you encounter authentication errors, use the setup script or manual configuration below.
+
 ```bash
-# Replace with your actual Trello credentials
+# Use our setup script (recommended)
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-claude-mcp.sh | bash
+
+# Or manually with claude mcp (may not save env vars)
 claude mcp add-json trello-optimized --scope user '{
   "command": "npx",
   "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
