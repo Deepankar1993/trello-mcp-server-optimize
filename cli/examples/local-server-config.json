@@ -1,0 +1,9 @@
+{
+  "name": "my-local-mcp-server",
+  "command": "node",
+  "args": ["/path/to/your/server/index.js"],
+  "env": {
+    "NODE_ENV": "production",
+    "DEBUG": "false"
+  }
+}
