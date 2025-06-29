@@ -29,7 +29,7 @@ node setup.js
 ### Option 2: Unix/Linux/macOS
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/main/setup-trello-mcp.sh | bash
+curl -sSL https://raw.githubusercontent.com/Deepankar1993/trello-mcp-server-optimize/master/setup-trello-mcp.sh | bash
 ```
 
 Or if you've cloned the repository:
