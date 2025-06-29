@@ -1,0 +1,51 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Test files
+__tests__/
+*.test.js
+*.test.ts
+jest.config.js
+coverage/
+
+# Development files
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Documentation source
+cline_docs/
+.claude/
+phase-*.md
+*-report.json
+*-measurements.js
+*-metrics-structured.csv
+*-raw-measurements.json
+*-summary.json
+
+# Test scripts
+test-*.js
+run-*.js
+
+# Development configs
+tsconfig.json
+optimization.config.json
+optimization-operation-types.json
+optimization-presets/
+
+# Git
+.git/
+.gitignore
+
+# Project planning
+PROJECT_PLAN.md
+test-scenarios.md
+top-10-token-analysis.md
+phase-*-completion-summary.md
+
+# Build artifacts not needed
+*.map

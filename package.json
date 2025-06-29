@@ -1,7 +1,7 @@
 {
     "name": "trello-mcp-server",
-    "version": "0.1.0",
-    "private": true,
+    "version": "1.0.0",
+    "private": false,
     "description": "Trello MCP Server - A Model Context Protocol server for interacting with the Trello API",
     "type": "module",
     "main": "build/index.js",
@@ -30,7 +30,7 @@
         "server",
         "api"
     ],
-    "author": "",
+    "author": "Deepankar1993",
     "license": "MIT",
     "repository": {
         "type": "git",
