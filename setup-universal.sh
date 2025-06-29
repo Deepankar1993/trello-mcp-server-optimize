@@ -87,25 +87,51 @@ print_color "$BLUE" "To use this server, you'll need Trello API credentials."
 print_color "$BLUE" "Get them from: https://trello.com/app-key"
 echo
 
-# Get API key
-while true; do
-    read -p "Enter your Trello API Key: " api_key
-    if [ -z "$api_key" ]; then
-        print_color "$RED" "API Key cannot be empty. Please try again."
-    else
-        break
-    fi
-done
-
-# Get Token
-while true; do
-    read -p "Enter your Trello Token: " token
-    if [ -z "$token" ]; then
-        print_color "$RED" "Token cannot be empty. Please try again."
-    else
-        break
-    fi
-done
+# Get API key - handle both TTY and non-TTY scenarios
+if [ -t 0 ]; then
+    # Interactive mode
+    while true; do
+        read -p "Enter your Trello API Key: " api_key
+        if [ -z "$api_key" ]; then
+            print_color "$RED" "API Key cannot be empty. Please try again."
+        else
+            break
+        fi
+    done
+    
+    while true; do
+        read -p "Enter your Trello Token: " token
+        if [ -z "$token" ]; then
+            print_color "$RED" "Token cannot be empty. Please try again."
+        else
+            break
+        fi
+    done
+else
+    # Non-interactive mode (piped) - prompt using stderr
+    print_color "$YELLOW" "Running in non-interactive mode. Please provide credentials:"
+    exec < /dev/tty
+    
+    while true; do
+        printf "Enter your Trello API Key: " >&2
+        read api_key
+        if [ -z "$api_key" ]; then
+            print_color "$RED" "API Key cannot be empty. Please try again."
+        else
+            break
+        fi
+    done
+    
+    while true; do
+        printf "Enter your Trello Token: " >&2
+        read token
+        if [ -z "$token" ]; then
+            print_color "$RED" "Token cannot be empty. Please try again."
+        else
+            break
+        fi
+    done
+fi
 
 # Configure Claude Code
 echo
@@ -124,15 +150,33 @@ config_json=$(cat <<EOF
 EOF
 )
 
-# Add the configuration to Claude Code
+# Add or update the configuration in Claude Code
 if command -v claude &> /dev/null; then
+    # First try to remove existing configuration if it exists
+    claude mcp remove trello-optimized --scope user 2>/dev/null || true
+    
+    # Now add the new configuration
     if claude mcp add-json trello-optimized --scope user "$config_json"; then
         print_color "$GREEN" "✓ Configuration added successfully!"
     else
-        print_color "$RED" "✗ Failed to configure Claude Code automatically."
-        print_color "$YELLOW" "You can manually add the configuration with:"
-        echo
-        echo "claude mcp add-json trello-optimized --scope user '$config_json'"
+        print_color "$YELLOW" "Trying to update existing configuration..."
+        # If add fails, it might already exist, so let's update it directly
+        config_file="$HOME/.config/@anthropic-ai/claude-cli/config.json"
+        if [ -f "$config_file" ]; then
+            # Create a backup
+            cp "$config_file" "$config_file.bak"
+            
+            # Update the config using a more robust method
+            print_color "$YELLOW" "Please run this command manually to update the configuration:"
+            echo
+            echo "claude mcp remove trello-optimized --scope user"
+            echo "claude mcp add-json trello-optimized --scope user '$config_json'"
+        else
+            print_color "$RED" "✗ Failed to configure Claude Code automatically."
+            print_color "$YELLOW" "You can manually add the configuration with:"
+            echo
+            echo "claude mcp add-json trello-optimized --scope user '$config_json'"
+        fi
     fi
 else
     print_color "$YELLOW" "Claude CLI not found in PATH after installation."
