@@ -194,4 +194,7 @@ function getOperationType(toolName: string): 'read' | 'write' | 'list' | 'search
 }
 
 // Start the server
-main().catch(console.error);
+main().catch((error) => {
+    originalConsoleError("Fatal error in main():", error);
+    process.exit(1);
+});

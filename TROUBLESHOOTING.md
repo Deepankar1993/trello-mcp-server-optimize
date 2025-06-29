@@ -1,5 +1,50 @@
 # Troubleshooting Trello MCP Server in Claude Code
 
+## Known Issues
+
+### Claude Code MCP Server Connection Failures
+
+**Issue**: After configuring the MCP server, Claude Code shows "Status: ✘ failed" with a wrapper script command.
+
+**Cause**: Claude Code sometimes has issues with environment variable handling or MCP server initialization, especially when using wrapper scripts.
+
+**Solutions**:
+
+1. **Direct Configuration (Recommended)**
+   Ensure your `~/.claude.json` uses direct npx execution:
+   ```json
+   {
+     "mcpServers": {
+       "trello-mcp-server": {
+         "command": "npx",
+         "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+         "env": {
+           "TRELLO_API_KEY": "your_api_key",
+           "TRELLO_TOKEN": "your_token"
+         }
+       }
+     }
+   }
+   ```
+
+2. **Restart Sequence**
+   If the server still shows as failed:
+   - Close Claude Code completely (not just the window)
+   - Wait a few seconds
+   - Reopen Claude Code
+   
+3. **System Restart**
+   If issues persist after application restart:
+   ```bash
+   sudo reboot
+   ```
+   This often resolves persistent connection issues with MCP servers.
+
+4. **Check MCP Logs**
+   - Open Claude Code
+   - Check the MCP server logs for specific error messages
+   - Look for authentication or connection errors
+
 ## Common Issues and Solutions
 
 ### 1. Server Not Appearing in Claude Code
@@ -28,8 +73,8 @@
    {
      "mcpServers": {
        "trello-mcp-server": {
-         "command": "node",
-         "args": ["/absolute/path/to/trello-mcp-server-optimize/build/index.js"],
+         "command": "npx",
+         "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
          "env": {
            "TRELLO_API_KEY": "your_trello_api_key_here",
            "TRELLO_TOKEN": "your_trello_token_here"
@@ -39,15 +84,15 @@
    }
    ```
 
-2. **Using NPM Global Installation**
-   If you installed globally with `npm install -g @cyberdeep/trello-mcp-server-optimize`:
+2. **Alternative: Local Installation**
+   If you prefer running from a local installation:
    
    ```json
    {
      "mcpServers": {
        "trello-mcp-server": {
-         "command": "npx",
-         "args": ["@cyberdeep/trello-mcp-server-optimize"],
+         "command": "node",
+         "args": ["/absolute/path/to/trello-mcp-server-optimize/build/index.js"],
          "env": {
            "TRELLO_API_KEY": "your_trello_api_key_here",
            "TRELLO_TOKEN": "your_trello_token_here"

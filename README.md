@@ -167,6 +167,35 @@ The script will:
 
 For detailed manual installation instructions for your specific platform, see [INSTALL.md](./INSTALL.md).
 
+### ⚠️ Known Issues with Claude Code
+
+**MCP Server Connection Failures**: If you see "Status: ✘ failed" after configuring the server:
+
+1. **Ensure proper configuration format** in `~/.claude.json`:
+   ```json
+   {
+     "mcpServers": {
+       "trello-mcp-server": {
+         "command": "npx",
+         "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+         "env": {
+           "TRELLO_API_KEY": "your_api_key",
+           "TRELLO_TOKEN": "your_token"
+         }
+       }
+     }
+   }
+   ```
+
+2. **Try restarting Claude Code completely** (not just closing the window)
+
+3. **If issues persist, restart your system**:
+   ```bash
+   sudo reboot
+   ```
+
+For more troubleshooting steps, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md).
+
 #### Option 1: Claude MCP CLI (Easiest - One Command)
 
 **⚠️ Known Issue**: The Claude MCP CLI may not properly save environment variables. If you encounter authentication errors, use the setup script or manual configuration below.
@@ -200,7 +229,7 @@ Add the following configuration:
 ```json
 {
   "mcpServers": {
-    "trello-optimized": {
+    "trello-mcp-server": {
       "command": "npx",
       "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
       "env": {
@@ -212,13 +241,19 @@ Add the following configuration:
 }
 ```
 
+**Note**: The server name should be `trello-mcp-server` for consistency with the setup script.
+
 #### Option 3: Other MCP Clients (Cursor, etc.)
 ```json
 {
   "mcpServers": {
-    "trello-optimized": {
+    "trello-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"]
+      "args": ["-y", "@cyberdeep/trello-mcp-server-optimize"],
+      "env": {
+        "TRELLO_API_KEY": "your_actual_api_key",
+        "TRELLO_TOKEN": "your_actual_token"
+      }
     }
   }
 }
