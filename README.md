@@ -156,7 +156,7 @@ Add to your config file:
 - `get_cards_in_list` - Get cards in list
 - `move_all_cards` - Move all cards
 
-[See full API documentation →](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
+[See full API documentation →](https://github.com/deepankar/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
 
 ## Advanced Features
 
@@ -190,7 +190,7 @@ Add to your config file:
 
 ```bash
 # Clone repository
-git clone https://github.com/cyberdeep/trello-mcp-server-optimize.git
+git clone https://github.com/Deepankar1993/trello-mcp-server-optimize.git
 cd trello-mcp-server-optimize
 
 # Install dependencies
@@ -230,14 +230,14 @@ If you see "Status: ✘ failed" in Claude:
 - **Permission errors**: Use `sudo npm install -g` or configure npm to use a different directory
 - **Server not found**: Make sure the package is installed globally
 
-[Full troubleshooting guide →](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/TROUBLESHOOTING.md)
+[Full troubleshooting guide →](https://github.com/Deepankar1993/trello-mcp-server-optimize/blob/master/docs/TROUBLESHOOTING.md)
 
 ## Documentation
 
-- [Architecture Guide](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/ARCHITECTURE.md)
-- [API Reference](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
-- [Optimization Guide](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/OPTIMIZATION_GUIDE.md)
-- [Migration Guide](https://github.com/cyberdeep/trello-mcp-server-optimize/blob/master/docs/MIGRATION_GUIDE.md)
+- [Architecture Guide](https://github.com/deepankar1993/trello-mcp-server-optimize/blob/master/docs/ARCHITECTURE.md)
+- [API Reference](https://github.com/deepankar1993/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
+- [Optimization Guide](https://github.com/deepankar1993/trello-mcp-server-optimize/blob/master/docs/OPTIMIZATION_GUIDE.md)
+- [Migration Guide](https://github.com/deepankar1993/trello-mcp-server-optimize/blob/master/docs/MIGRATION_GUIDE.md)
 
 ## Contributing
 
@@ -249,6 +249,6 @@ MIT © [Deepankar](https://github.com/Deepankar1993)
 
 ## Support
 
-- 🐛 [Report Issues](https://github.com/cyberdeep/trello-mcp-server-optimize/issues)
-- 💬 [Discussions](https://github.com/cyberdeep/trello-mcp-server-optimize/discussions)
+- 🐛 [Report Issues](https://github.com/deepankar1993/trello-mcp-server-optimize/issues)
+- 💬 [Discussions](https://github.com/deepankar1993/trello-mcp-server-optimize/discussions)
 - 📧 [Email Support](mailto:support@cyberdeep.com)
