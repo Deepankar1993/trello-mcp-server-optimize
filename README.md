@@ -156,7 +156,7 @@ Add to your config file:
 - `get_cards_in_list` - Get cards in list
 - `move_all_cards` - Move all cards
 
-[See full API documentation →](https://github.com/deepankar/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
+[See full API documentation →](https://github.com/deepankar1993/trello-mcp-server-optimize/blob/master/docs/API_REFERENCE.md)
 
 ## Advanced Features
 
